@@ -1,21 +1,24 @@
 {
   "name": "hello-express",
   "version": "0.0.1",
-  "description": "Darknes Code V12 Gif Bot Altyapı",
+  "description": "lrowsxrd gif bot v12",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.17.1",
-    "discord.js": "^12.3.1",
+    "express": "^4.17.1", 
+    "discord.js": "^12.5.0",
     "ms": "^2.1.2",
     "fs": "^0.0.2",
     "os": "^0.1.1",
+    "dabi-images": "^2.7.5",
     "moment": "^2.27.0",
     "moment-duration-format": "^2.2.2",
     "quick.db": "^7.1.1",
+    "common-tags": "^1.8.0",
     "request-promise-native": "^1.0.9",
+    "random-puppy": "^1.1.0",
     "request": "^2.88.2"
   },
   "engines": {
