@@ -19,7 +19,7 @@ ${prefix}ping / ${prefix}gifs
 > __Gifs Commands__\`🔥\`
 ${prefix}neon / ${prefix}boy / ${prefix}girl
 ${prefix}anime / ${prefix}emoji / ${prefix}couple
-${prefix}gipghy / ${prefix}baby
+${prefix}giphy / ${prefix}baby
 `)
 
 
