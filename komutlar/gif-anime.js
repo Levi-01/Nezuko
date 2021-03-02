@@ -11,7 +11,7 @@ let gifembed = new Discord.MessageEmbed()
 
 .setColor("RANDOM")
 
-.setFooter(`${message.author.tag} `, message.author.avatarURL)
+.setTimestamp()
 
 .setImage(replies[result]);
 
