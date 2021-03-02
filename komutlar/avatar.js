@@ -12,8 +12,8 @@ else {user = message.author;}
 return message.channel.send(new Discord.MessageEmbed()
                             
 
-.setDescription(`**[Avatar link]** (${user.avatarURL()})`)                       
-.setFooter(`Requested by(${user.tag})`).setTimestamp()                     
+.setDescription(`[**Avatar link**] (${user.avatarURL()})`)                       
+.setFooter(`Requested by (${user.tag})`).setTimestamp()                     
 .setImage(user.avatarURL({ format: 'png', dynamic: true, size: 1024})))
 
 };
