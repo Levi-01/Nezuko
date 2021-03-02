@@ -9,8 +9,8 @@ if (args.length < 1) {
 
 const embed = new Discord.MessageEmbed()
 
-.setColor("BLACK")
-.setDescription("**Doğru Kullanım**: -gif-ara <aranacak gif>");
+.setColor("#FFA500")
+.setDescription("**Search**: <your need gif>");
       
 return message.channel.send(embed);
       
@@ -42,8 +42,8 @@ if (response.data.length) {
 
 const embed = new Discord.MessageEmbed()
 
-.setColor("BLACK")
-.setDescription(`Gif Aranıyor : ${args.join(' ')}`.slice(0, 256))
+.setColor("RANDOM")
+.setDescription(`Giphy : ${args.join(' ')}`.slice(0, 256))
 .setImage(response.data[Math.floor(Math.random() * response.data.length)].images.original.url)
 
 return message.channel.send(embed);
