@@ -11,13 +11,13 @@ const yardım = new Discord.MessageEmbed()
 
 
 :white_small_square: **=**  \`-animegif\` : **Anime gif atar**
-:white_small_square: **=**  \`-boygif\`:  **Boy gif random**
+:white_small_square: **=**  \`-boygif\` :  **Boy gif random**
 :white_small_square: **=**  \`-babygif\` :  **Baby gif random**
 :white_small_square: **=**  \`girlgif\` :  **Girl gif random**
-:white_small_square: **=**  \`giphy\`: **Search your text**
+:white_small_square: **=**  \`giphy\` : **Search your text**
 `)
 .setImage("https://i.pinimg.com/originals/53/2e/2c/532e2cf9de6aadca17b775637974fe9b.gif")
-.setThumbnail("https://cdn.discordapp.com/emojis/790170217900670986.gif?v=1")
+.setThumbnail(client.user.avatarURL())
 message.channel.send(yardım)
 
   
