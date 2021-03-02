@@ -9,7 +9,7 @@ let result = Math.floor((Math.random() * replies.length));
 let gifembed = new Discord.MessageEmbed()
 
 
-.setColor("BLACK")
+.setColor("#f407f7")
 
 .setTimestamp()
 
