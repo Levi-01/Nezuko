@@ -9,7 +9,7 @@ exports.run = async (client, message, args, msg) => {
 const embed = new Discord.MessageEmbed()
     
 .setColor('#FFA500') 
-.setTitle("HELP")
+.setTitle("My prefix is ${prefix}")
 .setThumbnail(client.user.avatarURL())
 .setTimestamp()
 .setDescription(`
