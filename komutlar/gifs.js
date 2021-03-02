@@ -15,8 +15,6 @@ const yardım = new Discord.MessageEmbed()
 :white_small_square: **=**  \`?baby-gif\` :  **Bebek gifi atar**
 :white_small_square: **=**  \`?woman-gif\` :  **Kadın gifi atar**
 :white_small_square: **=**  \`?animal-gif\`: **Hayvan gifi atar**
-:white_small_square: **=**  \`?atatürk\`: **Bir tane var sadece Atatürk gifi atar**
-:white_small_square: **=**  \`?porn-gif\`: **Porno Gifleri Atar :joy:**
 `)
 .setImage("https://api.creavite.co/out/84ba34f0-d8ba-49b7-9ecf-fc0849f2d671_standard.gif")
 .setThumbnail("https://cdn.discordapp.com/emojis/790170217900670986.gif?v=1")
