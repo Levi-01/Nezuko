@@ -14,7 +14,7 @@ client.on('ready', async () => {
   }, 600);
   
 
-client.user.setActivity(`{ prefix }help`, { type:"PLAYING" })
+client.user.setActivity(`${prefix}help`, { type:"PLAYING" })
   console.log()
 });
 
