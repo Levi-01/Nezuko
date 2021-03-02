@@ -11,7 +11,7 @@ let gifembed = new Discord.MessageEmbed()
 
 .setColor("RANDOM")
 
-.setTimes()
+.setTimestamp()
 
 .setImage(replies[result]);
 
