@@ -5,8 +5,8 @@ exports.run = async (app, message, client) => {
   
 const darknes = new Discord.MessageEmbed()
 
-.setColor("BLACK")
-.setDescription('Ping Hesaplanıyor...')
+.setColor("#FFA500")
+.setDescription('loading...')
 
 let start = Date.now(); 
 let mesaj = await message.channel.send(darknes)
@@ -17,7 +17,7 @@ setInterval(() => {
         
 const only = new Discord.MessageEmbed()
 
-.setDescription(`\nMesaj Gecikme Süresi ; **${diff}ms** \n\nBot Gecikme Süresi ; **${API}ms**`)
+.setDescription(`\nMessage; **${diff}ms** \n\nBot ; **${API}ms**`)
 
 mesaj.edit(only);
       
