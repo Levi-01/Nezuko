@@ -18,15 +18,15 @@ return message.channel.send(embed);
     
 let options = {
 
-url: 'https://api.tenor.com/v1/search',
+url: 'https://api.giphy.com/v1/search',
 
 qs: {
 
 q: encodeURI(args.join('+')),
 
-api_key: '5UCGS7VOY39J',
+api_key: 'dc6zaTOxFJmzC',
 
-limit: 10,
+limit: 1,
 
 offset: 0
 
