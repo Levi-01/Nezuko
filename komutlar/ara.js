@@ -18,7 +18,7 @@ return message.channel.send(embed);
     
 let options = {
 
-url: 'https://api.giphy.com/v1/search',
+url: 'http://api.giphy.com/v1/gifs/search',
 
 qs: {
 
