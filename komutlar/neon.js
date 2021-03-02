@@ -9,11 +9,9 @@ let result = Math.floor((Math.random() * replies.length));
 
 let gifembed = new Discord.MessageEmbed()
 
-.setTitle("NEON GIF")
     
 .setColor("BLACK")
 
-.setFooter(`${message.author.tag} `, message.author.avatarURL)
 
 .setImage(replies[result]);
 
