@@ -18,13 +18,13 @@ return message.channel.send(embed);
     
 let options = {
 
-url: 'https://tenor.com/search/-gifs',
+url: 'https://tenor.com/search/gif',
 
 qs: {
 
 q: encodeURI(args.join('+')),
 
-api_key: 'TW6LBHJR1ZWL',
+api_key: '5UCGS7VOY39J',
 
 limit: 10,
 
