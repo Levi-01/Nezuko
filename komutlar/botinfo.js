@@ -12,12 +12,12 @@ exports.run = async (bot, message, args) => {
   
   const istatistikler = new Discord.MessageEmbed()
   
-  .setColor('BLACK')
+  .setColor('#FFA500')
   
   .setFooter('Bot İsmi', bot.user.avatarURL)
   
-  .addField("» **Botun Sahibi**", "<@733616760116215868>")
-  .addField("» **Bellek kullanımı**", (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + ' MB', true)  
+  .addField("» **Owner bot**", "<@721586986615439372>")
+  .addField("» **Storage**", (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + ' MB', true)  
   .addField("» **Çalışma süresi**", seksizaman)
   .addField("» **Kullanıcılar**" , bot.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString(), true)
   .addField("» **Discord.JS sürüm**", "v"+Discord.version, true)
