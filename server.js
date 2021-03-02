@@ -3,7 +3,7 @@ const fs = require('fs');
 const http = require('http');
 const express = require('express');
 const ayarlar = require('./ayarlar.json');
-const prefix = require('./ayarlar.json');
+const { prefix } = require('./ayarlar.json');
 const app = express();
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -14,8 +14,8 @@ client.on('ready', async () => {
   }, 600);
   
 
-client.user.setActivity(`Darknes Code V12 Gif Bot`, { type:"WATHING" })
-  console.log("[BOT] Kullanıma Hazır!")
+client.user.setActivity(`Developed By FIRAT#9999`, { type:"PLAYING" })
+  console.log(`{ prefix }help`)
 });
 
 const log = message => {
