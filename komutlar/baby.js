@@ -9,11 +9,10 @@ let result = Math.floor((Math.random() * replies.length));
 
 let gifembed = new Discord.MessageEmbed()
 
-.setTitle("BABY GIF")
     
 .setColor("#FFB9F0")
 
-.setFooter(`${message.author.tag} `, message.author.avatarURL)
+.setTimestamp()
 
 .setImage(replies[result]);
 
