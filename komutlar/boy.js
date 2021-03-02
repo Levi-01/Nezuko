@@ -23,7 +23,7 @@ exports.conf = {
 
   guildOnly: false,
 
-  aliases: ['gifboy','boygif','boy','gifman','mangif'],
+  aliases: ['man','gifboy','boygif','boy','gifman','mangif'],
 
   permLevel: 0
 
