@@ -14,12 +14,12 @@ const embed = new Discord.MessageEmbed()
 .setTimestamp()
 .setDescription(`
 > __Global Commands__\`✨\`
-${prefix}avatar / ${prefix}xo / ${prefix}slots 
+${prefix}avatar / ${prefix}info 
 ${prefix}ping / ${prefix}gifs
 > __Gifs Commands__\`🔥\`
 ${prefix}neon / ${prefix}boy / ${prefix}girl
 ${prefix}anime / ${prefix}emoji / ${prefix}couple
-${prefix}animal / ${prefix}baby
+${prefix}gipghy / ${prefix}baby
 `)
 
 
