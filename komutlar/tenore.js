@@ -18,7 +18,7 @@ return message.channel.send(embed);
     
 let options = {
 
-url: 'http://api.tenor.com/v1/gifs/search',
+url: 'https://tenor.com/search/-gifs',
 
 qs: {
 
