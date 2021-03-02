@@ -14,8 +14,8 @@ client.on('ready', async () => {
   }, 600);
   
 
-client.user.setActivity(`Developed By FIRAT#9999`, { type:"PLAYING" })
-  console.log(`{ prefix }help`)
+client.user.setActivity(`{ prefix }help`, { type:"PLAYING" })
+  console.log()
 });
 
 const log = message => {
