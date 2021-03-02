@@ -16,7 +16,7 @@ exports.run = async (bot, message, args) => {
   
   .setFooter('Nezuko', bot.user.avatarURL())
   
-  .addField("» **Owner bot**", "<@721586986615439372> , <@535222001313513491>")
+  .addField("» **Owner bot**", "<@721586986615439372>  <@535222001313513491>")
   .addField("» **Memory usage**", (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + ' MB', true)  
   .addField("» **Uptime**", seksizaman)
   .addField("» **Servers**",  bot.guilds.cache.size)
