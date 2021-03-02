@@ -3,6 +3,7 @@ const fs = require('fs');
 const http = require('http');
 const express = require('express');
 const ayarlar = require('./ayarlar.json');
+const prefix = require('./ayarlar.json');
 const app = express();
 const Discord = require('discord.js');
 const client = new Discord.Client();
