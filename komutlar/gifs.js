@@ -10,7 +10,7 @@ const yardım = new Discord.MessageEmbed()
 .setDescription(`
 
 
-:white_small_square: **=**  \`-animegif\` : **Anime gif atar**
+:white_small_square: **=**  \`-animegif\` : **Anime gif random**
 :white_small_square: **=**  \`-boygif\` :  **Boy gif random**
 :white_small_square: **=**  \`-babygif\` :  **Baby gif random**
 :white_small_square: **=**  \`girlgif\` :  **Girl gif random**
