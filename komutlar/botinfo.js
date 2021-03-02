@@ -14,19 +14,18 @@ exports.run = async (bot, message, args) => {
   
   .setColor('#FFA500')
   
-  .setFooter('Bot İsmi', bot.user.avatarURL)
+  .setFooter('Nezuko', bot.user.avatarURL())
   
   .addField("» **Owner bot**", "<@721586986615439372>")
   .addField("» **Storage**", (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + ' MB', true)  
   .addField("» **Çalışma süresi**", seksizaman)
   .addField("» **Kullanıcılar**" , bot.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString(), true)
-  .addField("» **Discord.JS sürüm**", "v"+Discord.version, true)
-  .addField("» **Node.JS sürüm**", `${process.version}`, true)
+  .addField("» **Discord.JS**", "v"+Discord.version, true)
+  .addField("» **Node.JS**", `${process.version}`, true)
   .addField("» **CPU**", `\`\`\`md\n${os.cpus().map(i => `${i.model}`)[0]}\`\`\``)
   .addField("» **Bit**", `\`${os.arch()}\``, true)
   .addField("» **İşletim Sistemi**", `\`\`${os.platform()}\`\``) 
-  .addField("**» Bot Davet**", " [Davet Et](BOT DAVET LİNKİ)", )
-  .addField("**» Destek Sunucusu**", " [Sunucumuza Katıl](DESTEK SUNUCUSU)", )
+ 
   
   return message.channel.send(istatistikler);
   };
