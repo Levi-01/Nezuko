@@ -11,6 +11,8 @@ let gifembed = new Discord.MessageEmbed()
 
 .setColor("BLACK")
 
+.setTimestamp()
+
 .setImage(replies[result]);
 
 message.channel.send(gifembed);
