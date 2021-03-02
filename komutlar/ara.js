@@ -26,7 +26,7 @@ q: encodeURI(args.join('+')),
 
 api_key: 'dc6zaTOxFJmzC',
 
-limit: 1,
+limit: 10,
 
 offset: 0
 
