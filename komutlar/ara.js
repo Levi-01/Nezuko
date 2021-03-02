@@ -77,7 +77,7 @@ exports.conf = {
 
   guildOnly: true,
 
-  aliases: ['giphy', 'gifara'],
+  aliases: ['gif', 'gifara'],
 
   permLevel: 0
 
