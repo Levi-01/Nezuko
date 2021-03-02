@@ -43,6 +43,7 @@ if (response.data.length) {
 const embed = new Discord.MessageEmbed()
 
 .setColor("RANDOM")
+.setTimestamp()
 .setDescription(`GiphyGif : ${args.join(' ')}`.slice(0, 256))
 .setImage(response.data[Math.floor(Math.random() * response.data.length)].images.original.url)
 
