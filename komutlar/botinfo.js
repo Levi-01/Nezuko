@@ -8,7 +8,7 @@ require("moment-duration-format");
 
 exports.run = async (bot, message, args) => {
   
-  const seksizaman = moment.duration(bot.uptime).format(" D [gün], H [saat], m [dakika], s [saniye]");
+  const seksizaman = moment.duration(bot.uptime).format(" D [Day], H [Hour], m [Min], s [second]");
   
   const istatistikler = new Discord.MessageEmbed()
   
