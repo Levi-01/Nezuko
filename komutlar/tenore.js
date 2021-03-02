@@ -18,7 +18,7 @@ return message.channel.send(embed);
     
 let options = {
 
-url: 'https://g.tenor.com/v1/search?q=excited&key=LIVDSRZULELA&limit=8',
+url: 'https://g.tenor.com/v1/search',
 
 qs: {
 
