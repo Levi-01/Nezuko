@@ -7,12 +7,11 @@ const embed = new Discord.MessageEmbed()
         
 .setTitle(`${client.user.username}`) 
 
-.addField("Yapımcılarım ", " <@733616760116215868>")
 
-.setDescription(`**Add Bot ;** [invite](BOTUNUZUN DAVET LINKI) \n**Destek Sunucusu ;** [Server](BOTUNUZUN DAVET LINKI)`) 
-.setThumbnail(client.user.avatarURL)
-.setFooter(`${message.author.username} Başarıyla Davet Sistemi Kullandı!`, message.author.avatarURL)
-.setColor("BLACK")
+.setDescription(`[Add to your server](https://discord.com/api/oauth2/authorize?client_id=816089794002157598&permissions=8&scope=bot) **|** [Support](https://discord.gg/emX4EmamKR)`) 
+.setThumbnail(client.user.avatarURL())
+.setFooter(`${message.author.username} Başarıyla Davet Sistemi Kullandı!`, message.author.avatarURL())
+.setColor("PNG")
 
 return message.channel.send(embed)
   
