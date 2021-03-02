@@ -18,13 +18,13 @@ return message.channel.send(embed);
     
 let options = {
 
-url: 'http://api.giphy.com/v1/gifs/search',
+url: 'https://api.tenor.com/v1/search',
 
 qs: {
 
 q: encodeURI(args.join('+')),
 
-api_key: 'dc6zaTOxFJmzC',
+api_key: '5UCGS7VOY39J',
 
 limit: 10,
 
@@ -43,7 +43,7 @@ if (response.data.length) {
 const embed = new Discord.MessageEmbed()
 
 .setColor("RANDOM")
-.setDescription(`Giphy : ${args.join(' ')}`.slice(0, 256))
+.setDescription(`TenorGif : ${args.join(' ')}`.slice(0, 256))
 .setImage(response.data[Math.floor(Math.random() * response.data.length)].images.original.url)
 
 return message.channel.send(embed);
