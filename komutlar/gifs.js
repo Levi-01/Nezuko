@@ -5,18 +5,18 @@ exports.run = function(client, message) {
   let prefix  = ayarlar.prefix
 
 const yardım = new Discord.MessageEmbed()
-.setColor('GREEN')
-.setAuthor(`GİF LANDS BOT - YARDIM MENÜSÜ`)
+.setColor('RANDOM')
+.setAuthor(`Nezuko Bot`)
 .setDescription(`
 
 
-:white_small_square: **=**  \`?anime-gif\` : **Anime gif atar**
-:white_small_square: **=**  \`?man-gif\`:  **Adam gifi atar**
-:white_small_square: **=**  \`?baby-gif\` :  **Bebek gifi atar**
-:white_small_square: **=**  \`?woman-gif\` :  **Kadın gifi atar**
-:white_small_square: **=**  \`?animal-gif\`: **Hayvan gifi atar**
+:white_small_square: **=**  \`-animegif\` : **Anime gif atar**
+:white_small_square: **=**  \`-boygif\`:  **Boy gif random**
+:white_small_square: **=**  \`-babygif\` :  **Baby gif random**
+:white_small_square: **=**  \`girlgif\` :  **Girl gif random**
+:white_small_square: **=**  \`giphy\`: **Search your text**
 `)
-.setImage("https://api.creavite.co/out/84ba34f0-d8ba-49b7-9ecf-fc0849f2d671_standard.gif")
+.setImage("https://i.pinimg.com/originals/53/2e/2c/532e2cf9de6aadca17b775637974fe9b.gif")
 .setThumbnail("https://cdn.discordapp.com/emojis/790170217900670986.gif?v=1")
 message.channel.send(yardım)
 
