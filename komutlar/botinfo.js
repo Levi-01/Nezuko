@@ -17,8 +17,9 @@ exports.run = async (bot, message, args) => {
   .setFooter('Nezuko', bot.user.avatarURL())
   
   .addField("» **Owner bot**", "<@721586986615439372>")
-  .addField("» **Storage**", (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + ' MB', true)  
+  .addField("» **Memory usage**", (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + ' MB', true)  
   .addField("» **Uptime**", seksizaman)
+  .addField("» **Servers**", `${client.guilds.cache.size}`)
   .addField("» **Members**" , bot.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString(), true)
   .addField("» **Discord.JS**", "v"+Discord.version, true)
   .addField("» **Node.JS**", `${process.version}`, true)
