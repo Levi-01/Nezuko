@@ -9,8 +9,7 @@ const embed = new Discord.MessageEmbed()
 
 
 .setDescription(`[Add to your server](https://discord.com/api/oauth2/authorize?client_id=816089794002157598&permissions=8&scope=bot) **|** [Support](https://discord.gg/emX4EmamKR)`) 
-.setThumbnail(client.user.avatarURL())
-.setFooter(`${message.author.username} Başarıyla Davet Sistemi Kullandı!`, message.author.avatarURL())
+.setFooter(`Requested by ${message.author.username}`, message.author.avatarURL())
 .setColor("PNG")
 
 return message.channel.send(embed)
