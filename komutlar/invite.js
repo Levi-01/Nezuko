@@ -7,7 +7,7 @@ const embed = new Discord.MessageEmbed()
         
 .setTitle(`${client.user.username}`) 
 
-
+.setTimestamp()
 .setDescription(`[Add to your server](https://discord.com/api/oauth2/authorize?client_id=816089794002157598&permissions=8&scope=bot) **|** [Support](https://discord.gg/emX4EmamKR)`) 
 .setFooter(`Requested by ${message.author.username}`, message.author.avatarURL())
 .setColor("PNG")
