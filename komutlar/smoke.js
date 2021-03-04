@@ -33,10 +33,10 @@ exports.conf = {
 
 exports.help = {
 
-  name: 'neon',
+  name: 'smoke',
 
   description: 'lrowsxrd',
 
-  usage: 'neon'
+  usage: 'smoke'
 
 };
