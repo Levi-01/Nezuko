@@ -100,4 +100,29 @@ client.elevation = message => {
     if (message.author.id === ayarlar.sahip) permlvl = 4;
     return permlvl;
 };
+//sug
+
+client.on('message', function(message) {
+let args = message.content.split(" ").slice('').join(" ");
+if(message.author.bot)return;
+const sugch = message.channel.id === "816792193359806523"
+if (!sugch) return false;
+if(message.content.startsWith('')){
+  message.delete()
+const embed = new Discord.MessageEmbed()
+.setAuthor(message.author.username,message.author.avatarURL())
+.setImage("https://cdn.discordapp.com/attachments/790471993317130250/803575439221850162/suggestions.png")
+.setColor("RANDOM")
+.setThumbnail(message.author.avatarURL())
+.setDescription(`${args}`)
+.setFooter(`Suggestion by | ${message.author.id}`)
+.setTimestamp()
+message.channel.send(embed).then(msg => {
+  msg.react('👍').then( r => {
+    msg.react('👎')
+  })
+})
+}
+});
+
 client.login(ayarlar.token)
