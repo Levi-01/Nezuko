@@ -16,6 +16,8 @@ const yardım = new Discord.MessageEmbed()
 :white_small_square: **=**  \`girlgif\` :  **Girl gif random**
 :white_small_square: **=**  \`giphy\` : **Search your text**
 :white_small_square: **=**  \`smoke\` : **Smoke gif random**
+:white_small_square: **=**  \`bff\` : **Bff gif random**
+:white_small_square: **=**  \`streamer\` : **Streamer gif random**
 `)
 .setImage("https://i.pinimg.com/originals/53/2e/2c/532e2cf9de6aadca17b775637974fe9b.gif")
 .setThumbnail(client.user.avatarURL())
