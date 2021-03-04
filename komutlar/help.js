@@ -14,7 +14,7 @@ const embed = new Discord.MessageEmbed()
 .setTimestamp()
 .setDescription(`
 > __Global Commands__\`✨\`
-avatar / info 
+avatar / info /
 ping / gifs
 > __Gifs Commands__\`🔥\`
 neon / boy / girl
