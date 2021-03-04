@@ -18,8 +18,8 @@ avatar / info
 ping / gifs
 > __Gifs Commands__\`🔥\`
 neon / boy / girl
-anime / emoji / couple
-giphy / baby /smoke
+anime / emoji / couple /
+giphy / baby / smoke / bff
 `)
 
 
