@@ -33,10 +33,10 @@ exports.conf = {
 
 exports.help = {
 
-  name: 'streamer',
+  name: 'movie',
 
   description: 'lrowsxrd',
 
-  usage: 'streamer'
+  usage: 'movie'
 
 };
