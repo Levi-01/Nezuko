@@ -13,7 +13,7 @@ let gifembed = new Discord.MessageEmbed()
 
 .setImage(replies[result]);
 
-
+.setTimestamp()
 
 message.channel.send(gifembed);
 
@@ -25,7 +25,7 @@ exports.conf = {
 
   guildOnly: false,
 
-  aliases: ['gif-smoke','smoke-gif','gifsmoke','smokegif'],
+  aliases: ['smoke','smoke-gif','gifsmoke','smokegif'],
 
   permLevel: 0
 
