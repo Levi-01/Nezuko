@@ -112,7 +112,7 @@ if(message.content.startsWith('')){
 const embed = new Discord.MessageEmbed()
 .setAuthor(message.author.username,message.author.avatarURL())
 .setImage("https://cdn.discordapp.com/attachments/790471993317130250/803575439221850162/suggestions.png")
-.setColor("RANDOM")
+.setColor("#FFA500")
 .setThumbnail(message.author.avatarURL())
 .setDescription(`${args}`)
 .setFooter(`Suggestion by | ${message.author.id}`)
