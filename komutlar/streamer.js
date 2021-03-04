@@ -25,7 +25,7 @@ exports.conf = {
 
   guildOnly: false,
 
-  aliases: ['smokegif','smoke','gifsmoke'],
+  aliases: ['streamer','streamergif','gifstreamer'],
 
   permLevel: 0
 
@@ -33,10 +33,10 @@ exports.conf = {
 
 exports.help = {
 
-  name: 'smoke',
+  name: 'streamer',
 
   description: 'lrowsxrd',
 
-  usage: 'smoke'
+  usage: 'streamer'
 
 };
