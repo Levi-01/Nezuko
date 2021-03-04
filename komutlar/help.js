@@ -8,7 +8,7 @@ exports.run = async (client, message, args, msg) => {
 
 const embed = new Discord.MessageEmbed()
     
-.setColor('#FC3581') 
+.setColor('#FC3581','#FE4A68') 
 .setTitle(`My prefix is (${prefix})`)
 .setThumbnail(client.user.avatarURL())
 .setTimestamp()
