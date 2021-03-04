@@ -17,7 +17,7 @@ const embed = new Discord.MessageEmbed()
 avatar / info /
 ping / gifs
 > __Gifs Commands__\`🔥\`
-neon / boy / girl
+neon / boy / girl /
 anime / emoji / couple /
 giphy / baby / smoke / bff / movie 
 `)
