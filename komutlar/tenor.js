@@ -1,9 +1,10 @@
 
 const fetch = require('node-fetch');
 const { tenorAPI } = require('TW6LBHJR1ZWL');
-const { Command } = require('discord.js-commando');
+const Discord = require("discord.js");
 
-module.exports = class GifCommand extends Command {
+exports.run = async (Bastion, message, args) => {
+
   constructor(client) {
     super(client, {
       name: 'gif',
