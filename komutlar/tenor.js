@@ -9,7 +9,7 @@ exports.run = async (Bastion, message, args) => {
     super(client, {
       name: 'gif',
       group: 'gifs',
-      aliases: ['search-gif', 'search-gifs'],
+      aliases: ['search', 'search-gifs'],
       memberName: 'gif',
       description: 'Provide a query and I will return a gif!',
       throttling: {
