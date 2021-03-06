@@ -1,60 +1,48 @@
 const Discord = require("discord.js");
 const db = require("quick.db");
-module.exports.run = async (bot, message, args) => {
-  if (!message.member.hasPermission("KICK_MEMBERS")) {
-    const embed = new Discord.MessageEmbed()
-      .setDescription("```Unfortunately, you are not authorized to use this command.```")
-      .setColor("BLACK");
+const moment = require("moment");
+const chalk = require("chalk");
+
+
+exports.run = async (client, message, args) => {
+
+if (!message.member.hasPermission("KICK_MEMBERS"))// Sadece Üyeleri At yetkisine sahip olanlar kullanabilcek
+   return message.channel.send(`${message.author} Bu yetkiyi kullanabilmek için **Üyeleri At** yetkisine sahip olmak zorundasın.`);
+
  
-    message.channel.send(embed);
-    return;
-  }
+ var kisi = message.mentions.users.first() || message.guild.members.cache.get(args[0]);// Kişi tanımlıyoz
+ var sebep = args.slice(1).join(' ');// Sebep tanımlıyoz
  
-  let u = message.mentions.users.first();
-  if (!u) {
-    return message.channel.send(
-      new Discord.MessageEmbed()
-        .setDescription("Please tag the person to discard!")
-        .setColor("BLACK")
-        .setFooter(bot.user.username, bot.user.avatarURL)
-    );
-  }
+
+ if(!kisi) return message.reply("Kickliyeceğin Kişiyi Belirtirmisin?" + " **__Örnek Kullanım__** " + "```.kick @Shréwd```", false )
+ .then(x => x.delete({ timeout: 5000 }));
+
+ if(!sebep) return message.reply("Sebep belirtirmisin?")
+  
+
+ if(!message.guild.member(kisi).kickable)// Eğer kullanıcı biri atmayı denerse ama yapamazsa hata verir
+    return message.reply("Bu kişiyi kickleyemezsiniz.")
+
+    
+    message.guild.member(kisi).kick(sebep);// Kişi Kicklendi!
+
  
-  const embed = new Discord.MessageEmbed()
-    .setColor("BLACK")
-    .setDescription(`${u}Are you sure want to kick this?`)
-    .setFooter(bot.user.username, bot.user.avatarURL);
-  message.channel.send(embed).then(async function(sentEmbed) {
-    const emojiArray = ["✅"];
-    const filter = (reaction, user) =>
-      emojiArray.includes(reaction.emoji.name) && user.id === message.author.id;
-    await sentEmbed.react(emojiArray[0]).catch(function() {});
-    var reactions = sentEmbed.createReactionCollector(filter, {
-      time: 30000
-    });
-    reactions.on("end", () => sentEmbed.edit("İşlem iptal oldu!"));
-    reactions.on("collect", async function(reaction) {
-      if (reaction.emoji.name === "✅") {
-        message.channel.send(
-          `Transaction confirmed! ${u} the named person was ejected from the server!`
-        );
- 
-        message.guild.member(u).kick();
-      }
-    });
-  });
+
+var kickaq = new Discord.MessageEmbed()
+  .setColor("RANDOM")
+  .setAuthor(message.author.username, message.author.displayAvatarURL({dynamic: true, format: "png", size: 1024}))
+  .addField("Kicklenen Kişi Ve Sebebi", `Kicklenen Kişi: **${kisi}**\nKicklenme Nedeni: **${sebep}**`)
+    return message.channel.send(kickaq);
 };
- 
-module.exports.conf = {
+
+
+exports.conf = {
   aliases: [],
-  permLevel: 2,
-  enabled: true,
-  guildOnly: true,
-  kategori: "moderasyon"
+  permLevel: 0
 };
- 
-module.exports.help = {
+
+exports.help = {
   name: "kick",
-  description: "kick",
-  usage: "kick"
-};
+  description: "Sunucudan Birini Atar",
+  usage: "kick {kisi} sebep"
+};    
