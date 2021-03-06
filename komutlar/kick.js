@@ -1,48 +1,51 @@
-const Discord = require("discord.js");
-const db = require("quick.db");
-const moment = require("moment");
-const chalk = require("chalk");
-
-
-exports.run = async (client, message, args) => {
-
-if (!message.member.hasPermission("KICK_MEMBERS"))// Sadece Üyeleri At yetkisine sahip olanlar kullanabilcek
-   return message.channel.send(`${message.author} Bu yetkiyi kullanabilmek için **Üyeleri At** yetkisine sahip olmak zorundasın.`);
-
- 
- var kisi = message.mentions.users.first() || message.guild.members.cache.get(args[0]);// Kişi tanımlıyoz
- var sebep = args.slice(1).join(' ');// Sebep tanımlıyoz
- 
-
- if(!kisi) return message.reply("Kickliyeceğin Kişiyi Belirtirmisin?" + " **__Örnek Kullanım__** " + "```.kick @Shréwd```", false )
- .then(x => x.delete({ timeout: 5000 }));
-
- if(!sebep) return message.reply("Sebep belirtirmisin?")
-  
-
- if(!message.guild.member(kisi).kickable)// Eğer kullanıcı biri atmayı denerse ama yapamazsa hata verir
-    return message.reply("Bu kişiyi kickleyemezsiniz.")
-
-    
-    message.guild.member(kisi).kick(sebep);// Kişi Kicklendi!
-
- 
-
-var kickaq = new Discord.MessageEmbed()
-  .setColor("RANDOM")
-  .setAuthor(message.author.username, message.author.displayAvatarURL({dynamic: true, format: "png", size: 1024}))
-  .addField("Kicklenen Kişi Ve Sebebi", `Kicklenen Kişi: **${kisi}**\nKicklenme Nedeni: **${sebep}**`)
-    return message.channel.send(kickaq);
-};
-
-
+const Discord = require('discord.js')
+const db = require('quick.db')
+const ayarlar = require("../ayarlar.json")
+exports.run = async(client, message, args) => {
+  let prefix = ayarlar.prefix
+  if(!message.member.hasPermission("KICK_MEMBERS")) return;
+  if(!message.guild.members.cache.get(client.user.id).hasPermission("KICK_MEMBERS")) return;
+     let kişi = message.mentions.users.first()
+     let sebep = args.slice(1).join(" ")
+     if(!kişi) {
+       const ikrud = new Discord.MessageEmbed()
+.setColor("#ff0000")
+.setDescription(`> **Komudu** Lütfen **\`${prefix}kick @kullanıcı sebep\`** Şeklinde **Kullanınız!**`)
+return message.channel.send(ikrud)
+     }
+     if(!sebep) sebep = `Sebep: Belirtilmemiş`
+     if(kişi.id === message.guild.ownerID) {
+       const pekabot = new Discord.MessageEmbed()
+.setColor("#ff0000")
+.setDescription(`**Sunucu Sahibini Atamazsın!**`)
+return message.channel.send(pekabot)
+     }
+     if(kişi.id === client.user.id) {
+       const pekabot = new Discord.MessageEmbed()
+.setColor("#ff0000")
+.setDescription(`**Beni Benlemi Atıcaksın?**`)
+return message.channel.send(pekabot)
+     }
+     if(kişi.id === message.author.id) {
+       const peka = new Discord.MessageEmbed()
+.setColor("#ff0000")
+.setDescription(`**Kendini Sunucudan Atamazsın!**`)
+return message.channel.send(peka)
+     }
+     message.guild.member(kişi).kick({ reason: `Sebep: ${sebep} | Kullanıcıyı Atan Kişi ${message.author.tag}` })
+ const ikrudka = new Discord.MessageEmbed()
+.setColor("#ffcb00")
+.setDescription(`**<@${kişi.user.id}> Adlı Üye Sunucudan Kicklendi**`)
+return message.channel.send(ikrudka)
+   }
 exports.conf = {
-  aliases: [],
-  permLevel: 0
+    enabled: true,
+    guildOnly: true,
+    aliases: ['kickle',"at"],
+    permLevel: 0
 };
-
-exports.help = {
-  name: "kick",
-  description: "Sunucudan Birini Atar",
-  usage: "kick {kisi} sebep"
-};    
+  exports.help = {
+    name: 'kick',      
+    description: 'Belirtilen Kişiyi Sunucudan Kickler',
+    usage: 'kick <kullanıcı>'
+};
