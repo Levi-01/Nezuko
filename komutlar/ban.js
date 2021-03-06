@@ -5,21 +5,21 @@ const ayarlar = require("../ayarlar.json");
 
 exports.run = async(client, message, args) => {
     if (!message.member.hasPermission("ADMINISTRATOR")) 
-return message.channel.send(`Bu Komutu Kullanabilmek İçin "\`Yönetici\`" Yetkisine Sahip Olmalısın.`);
-  let acebot = new Discord.MessageEmbed().setColor('#70ff70').setFooter(`Komut ${message.author.tag} Tarafından Kullanıldı ! `).setTimestamp();
+return message.channel.send(`To Use This Command "\`Yönetici\`" You Must Have Authority.`);
+  let acebot = new Discord.MessageEmbed().setColor('#70ff70').setFooter(` ${message.author.tag} `).setTimestamp();
   let user = message.mentions.users.first()
     let prefix = ayarlar.prefix
     let sebep = args.slice(1).join(' ') || "Belirtilmemiş."
-    if(!user) return message.channel.send(acebot.setDescription(`**> Hatalı Kullanım...**\n> **Bir kişi etiketlemelisin!**\n > Örnek Kullanım: **\`${prefix}ban @kullanıcı <sebep>\`**`))
-    if(user.id === message.author.id) return message.channel.send(acebot.setDescription('Kendini banlayamazsın.'))
-    if(user.id === client.user.id) return message.channel.send(acebot.setDescription('Botu banlayamazsın.'))
-    if(user.id === message.guild.ownerID) return message.channel.send(acebot.setDescription ('Sunucu sahibini banlayamazsın.'))
-    if (!message.guild.member(user).bannable) return message.channel.send(acebot.setDescription(' Bu kişinin rolü senden üstte veya `Üyeleri yasakla` yetkisine sahip.'));
+    if(!user) return message.channel.send(acebot.setDescription(`**> Misuse...**\n> **You should tag a contact!**\n > Sample Usage: **\`${prefix}ban @user < reason >\`**`))
+    if(user.id === message.author.id) return message.channel.send(acebot.setDescription('You can't ban yourself.'))
+    if(user.id === client.user.id) return message.channel.send(acebot.setDescription('You can't ban the bot.'))
+    if(user.id === message.guild.ownerID) return message.channel.send(acebot.setDescription ('You can't ban the server owner.'))
+    if (!message.guild.member(user).bannable) return message.channel.send(acebot.setDescription(`This person's role is above you or has the authority to Ban member`));
 
 
 
    message.guild.members.cache.get(user.id).ban({reason: `${sebep}`})
-      let embed = acebot.setDescription(`${user} adlı kullanıcı ${message.author.tag} tarafından \`${sebep}\` sebebi ile banlandı. `)
+      let embed = acebot.setDescription(`${user} named user ${message.author.tag} By \`${sebep}\` banned for reasons. `)
 
 };
  
