@@ -10,7 +10,7 @@ return message.channel.send(`To Use This Command "\`Yönetici\`" You Must Have A
   let acebot = new Discord.MessageEmbed().setColor('#70ff70').setFooter(` ${message.author.tag} `).setTimestamp();
   let user = message.mentions.users.first()
     let prefix = ayarlar.prefix
-    let sebep = args.slice(1).join(' ') || " ${message.author.tag} "
+    let sebep = args.slice(1).join(' ') || "By: ${message.author.tag} "
     if(!user) return message.channel.send(acebot.setDescription(`**> Misuse...**\n> **You should tag a contact!**\n > Sample Usage: **\`${prefix}ban @user < reason >\`**`))
     if(user.id === message.author.id) return message.channel.send(acebot.setDescription('You can t ban yourself'))
     if(user.id === client.user.id) return message.channel.send(acebot.setDescription('You can t ban the bot.'))
