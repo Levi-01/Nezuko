@@ -10,7 +10,8 @@ exports.run = async(client, message, args) => {
      if(!kişi) {
        const ikrud = new Discord.MessageEmbed()
 .setColor("#ff0000")
-.setDescription(`${prefix}ban User`)
+.setDescription(`${prefix}unban User`)
+.then(x => x.delete({ timeout: 5000 }));
 return message.channel.send(ikrud)
      }
      if(!sebep) sebep = `Sebep: Belirtilmemiş`
