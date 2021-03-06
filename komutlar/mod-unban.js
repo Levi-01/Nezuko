@@ -11,7 +11,6 @@ exports.run = async(client, message, args) => {
        const ikrud = new Discord.MessageEmbed()
 .setColor("#ff0000")
 .setDescription(`${prefix}unban User`)
-.then(x => x.delete({ timeout: 5000 }));
 return message.channel.send(ikrud)
      }
      if(!sebep) sebep = `Sebep: Belirtilmemiş`
@@ -39,7 +38,7 @@ return message.channel.send(peka)
      message.guild.member(kişi).unban({ reason: `Reason: ${sebep} | By: ${message.author.tag}` })
  const ikrudka = new Discord.MessageEmbed()
 .setColor("#ffcb00")
-.setDescription(`**<@${kişi.id}> Named Member Banned From Server**`)
+.setDescription(`**<@${kişi.id}> Named Member UnBanned From Server**`)
 return message.channel.send(ikrudka)
    }
 exports.conf = {
