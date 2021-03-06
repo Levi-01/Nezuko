@@ -26,7 +26,7 @@ exports.conf = {
   enabled: true, 
   guildOnly: false, 
   aliases: ["sil", "clear", "prune"],
-  permLevel: `Mesajları yönet yetkisine sahip olmak gerekir.`
+  permLevel: 0
 };
 
 exports.help = {
