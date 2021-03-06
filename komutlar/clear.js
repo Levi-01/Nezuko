@@ -25,7 +25,7 @@ message.channel.send(`**${args[0]}** the custom message was successfully deleted
 exports.conf = {
   enabled: true, 
   guildOnly: false, 
-  aliases: ["sil", "clear", "mesajları-sil"],
+  aliases: ["sil", "clear", "prune"],
   permLevel: `Mesajları yönet yetkisine sahip olmak gerekir.`
 };
 
