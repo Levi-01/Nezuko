@@ -8,18 +8,18 @@ exports.run = function(client, message, args) {
 if(isNaN(args[0])) {
   var errembed = new Discord.MessageEmbed()
     .setColor("RANDOM")
-    .addField(`Yanlış Kullanım!`, `Bir rakam yazmalısın!`)
-    .addField(`Doğru Kullanım:`, `${ayarlar.prefix}sil <temizlenecek mesaj sayısı>`)
+    .addField(`Misuse!', 'You should write a number!`)
+    .addField(`Proper Use:`, `${ayarlar.prefix}sil < number of messages to clear >`)
 return message.channel.send(errembed);
 }
   
-if (args[0] < 1) return message.reply("**1** adetten az mesaj silemem!")
-if (args[0] > 100) return message.reply("**100** adetten fazla mesaj silemem!")
+if (args[0] < 1) return message.reply("**1** I can't delete less than menstrual messages!")
+if (args[0] > 100) return message.reply("**100** I can't delete more than menstrual messages!")
   
 message.channel.bulkDelete(args[0]).then(deletedMessages => {
-if (deletedMessages.size < 1) return message.reply("Hiç mesaj silemedim! _(**14** günden önceki mesajları silemem!)_");
+if (deletedMessages.size < 1) return message.reply("I couldn't delete any messages.! _(**14** I can't delete messages before the day!)_");
 })
-message.channel.send(`**${args[0]}** adet mesaj başarıyla silindi!`)
+message.channel.send(`**${args[0]}** the custom message was successfully deleted! `)
 };
 
 exports.conf = {
