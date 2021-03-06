@@ -10,32 +10,32 @@ exports.run = async(client, message, args) => {
      if(!kişi) {
        const ikrud = new Discord.MessageEmbed()
 .setColor("#ff0000")
-.setDescription(`> **Komudu** Lütfen **\`${prefix}kick @kullanıcı sebep\`** Şeklinde **Kullanınız!**`)
+.setDescription(`**${prefix}kick ```@user```!`)
 return message.channel.send(ikrud)
      }
      if(!sebep) sebep = `Sebep: Belirtilmemiş`
      if(kişi.id === message.guild.ownerID) {
        const pekabot = new Discord.MessageEmbed()
 .setColor("#ff0000")
-.setDescription(`**Sunucu Sahibini Atamazsın!**`)
+.setDescription(`** You Can't Discard a Server Owner!**`)
 return message.channel.send(pekabot)
      }
      if(kişi.id === client.user.id) {
        const pekabot = new Discord.MessageEmbed()
 .setColor("#ff0000")
-.setDescription(`**Beni Benlemi Atıcaksın?**`)
+.setDescription(`** You're Going to Dump Me?**`)
 return message.channel.send(pekabot)
      }
      if(kişi.id === message.author.id) {
        const peka = new Discord.MessageEmbed()
 .setColor("#ff0000")
-.setDescription(`**Kendini Sunucudan Atamazsın!**`)
+.setDescription(`** You Can't Throw Yourself Off the Server!**`)
 return message.channel.send(peka)
      }
      message.guild.member(kişi).kick({ reason: `Sebep: ${sebep} | Kullanıcıyı Atan Kişi ${message.author.tag}` })
  const ikrudka = new Discord.MessageEmbed()
 .setColor("#ffcb00")
-.setDescription(`**<@${kişi.user.id}> Adlı Üye Sunucudan Kicklendi**`)
+.setDescription(`**<@${kişi.user.tag}> Named Member Kicked From Server**`)
 return message.channel.send(ikrudka)
    }
 exports.conf = {
