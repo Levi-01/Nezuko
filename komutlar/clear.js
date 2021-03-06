@@ -31,7 +31,7 @@ exports.run = async (client, message, args) => {
     .bulkDelete(Number(args[0]))
     .then(mesajlar => message.channel.send(embed
 
-    .setDescription(`Başarıyla **${mesajlar.size}** adet mesaj silindi `))
+    .setDescription(`Successfully deleted **${mesajlar.size}** messages `))
     .then(x => x.delete({ timeout: 5000 })))
     .catch();
 };
