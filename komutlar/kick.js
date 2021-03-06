@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args) => {
  
   const embed = new Discord.MessageEmbed()
     .setColor("BLACK")
-    .setDescription(`${u}Are you sure wat to kick this?`)
+    .setDescription(`${u}Are you sure want to kick this?`)
     .setFooter(bot.user.username, bot.user.avatarURL);
   message.channel.send(embed).then(async function(sentEmbed) {
     const emojiArray = ["✅"];
