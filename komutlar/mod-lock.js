@@ -4,7 +4,7 @@ message.channel.createOverwrite(every, {
     SEND_MESSAGES: false
   });
 
-  message.channel.send("Chat Closed. To Open (botun prefixi) chat-open");
+  message.channel.send('**🔒has been locked**');
 };
 
 exports.conf = {
