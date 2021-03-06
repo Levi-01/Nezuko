@@ -35,7 +35,7 @@ return message.channel.send(pekabot)
 .then(x => x.delete({ timeout: 5000 }));
 return message.channel.send(peka)
      }
-     message.guild.member(kişi).kick({ reason: `Sebep: ${sebep} | Kullanıcıyı Atan Kişi ${message.author.tag}` })
+     message.guild.member(kişi).kick({ reason: `Reason: ${sebep} | By: ${message.author.tag}` })
  const ikrudka = new Discord.MessageEmbed()
 .setColor("#ffcb00")
 .setDescription(`**<@${kişi.id}> Named Member Kicked From Server**`)
