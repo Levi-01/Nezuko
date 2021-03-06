@@ -1,55 +1,37 @@
-
-const Discord = require('discord.js')
+const { MessageEmbed } = require('discord.js')
 const db = require('quick.db')
+const moment = require('moment')
 const ayarlar = require("../ayarlar.json")
-exports.run = async(client, message, args) => {
-  let prefix = ayarlar.prefix
-  if(!message.member.hasPermission("BAN_MEMBERS")) return;
-  if(!message.guild.members.cache.get(client.user.id).hasPermission("BAN_MEMBERS")) return;
-     let kişi = message.mentions.users.first()
-     let sebep = args.slice(1).join(" ")
-     if(!kişi) {
-       const ikrud = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`${prefix}unban User`)
-return message.channel.send(ikrud)
-     }
-     if(!sebep) sebep = `Sebep: Belirtilmemiş`
-     if(kişi.id === message.guild.ownerID) {
-       const pekabot = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`** You Can t Discard a Server Owner!**`)
-.then(x => x.delete({ timeout: 5000 }));
-return message.channel.send(pekabot)
-     }
-     if(kişi.id === client.user.id) {
-       const pekabot = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`** You re Going to Dump Me?**`)
-.then(x => x.delete({ timeout: 5000 }));
-return message.channel.send(pekabot)
-     }
-     if(kişi.id === message.author.id) {
-       const peka = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`** You Can t Throw Yourself Off the Server!**`)
-.then(x => x.delete({ timeout: 5000 }));
-return message.channel.send(peka)
-     }
-     message.guild.member(kişi).unban({ reason: `Reason: ${sebep} | By: ${message.author.tag}` })
- const ikrudka = new Discord.MessageEmbed()
-.setColor("#ffcb00")
-.setDescription(`**<@${kişi.id}> Named Member Unbanned From Server**`)
-return message.channel.send(ikrudka)
-   }
-exports.conf = {
-    enabled: true,
-    guildOnly: true,
-    aliases: ['unban',"unbanned"],
-    permLevel: 0
-};
+exports.run = async (client, message, args) => {
+  
+const permError = new MessageEmbed()
+    .setColor('RED')
+    .setTitle('Failed')
+    .setAuthor(message.author.tag, message.author.avatarURL({ size:1024, dynamic:true, format: "png"}))
+    .setDescription(`To Use This Command <@&${ayarlar.banYetkiliRolID}> You Must Have Authority!`) 
+  
+if (!message.member.roles.cache.has(ayarlar.banYetkiliRolID)) return message.channel.send(permError); 
+
+const banlog = message.guild.channels.cache.find(c => c.id === ayarlar.unbanLogKanalID)
+
+  
+let kisi = await client.users.fetch(args[0]);
+if(!kisi) return message.channel.send(new MessageEmbed().setDescription(`${message.author} you must specify an ID.`).setColor('0x800d0d').setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true })).setTimestamp()).then(x => x.delete({timeout: 5000}));
+
+message.guild.members.unban(kisi.id)
+message.channel.send(new MessageEmbed().setDescription(`${message.author} By ${kisi} user's server ban has been lifted.`).setColor('0x348f36').setAuthor(message.member.displayName, message.author.avatarURL({ dynamic:true }))).then(x => x.delete({ timeout: 5000}))
+  
+message.react('✅')
+banlog.send(new MessageEmbed().setColor('0x348f36').setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true })).setTimestamp().setDescription(`**Sunucudan Yasağı Kaldırıldı !**\n**Kaldıran Yetkili:** ${message.author} (\`${message.author.id}\`) \n**Banı Kaldırılan Üye:** ${kisi} (\`${kisi.id}\`) \n**Ban Kaldırma Tarihi:** \`${moment(Date.now()).add(10,"hours").format("HH:mm:ss DD MMMM YYYY")}\` `));
+
+}
+  exports.conf = {
+  enabled: true,
+  guildOnly: true,
+  aliases: ["unban", "yasak-kaldır"],
+  permLvl: 0,
+}
+
   exports.help = {
-    name: 'unban',      
-    description: 'Belirtilen Kişiyi Sunucudan Kickler',
-    usage: 'unban <kullanıcı>'
-};
+  name: 'unban'
+}
