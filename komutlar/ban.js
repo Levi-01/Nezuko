@@ -1,17 +1,17 @@
  const Discord = require('discord.js');
 //BLACK 
 exports.run = (client, message, args) => {
-    if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("Yeterli yetkiniz yok");
+    if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("You don't have enough authority");
     let kullanici = args[0];
-    if (!kullanici) return message.channel.send("Bir kullanıcı ID' si girmen gerek")
+    if (!kullanici) return message.channel.send("You need to enter a user ID")
     message.guild.fetchBans()
         .then(bans => {
             if (!bans.has(kullanici)) {
-                return message.channel.send(`Bu kullanıcı banlanmamış.`)
+                return message.channel.send(`This user is not banned.`)
             }
         })
     message.guild.fetchBan(kullanici).then(({ user, reason }) => {
-        message.channel.send(`${user.tag} adlı kullanıcının ban nedeni: **${reason}**`)
+        message.channel.send(`${user.tag} the reason for the ban of the user named: **${reason}**`)
 
     })
 }
