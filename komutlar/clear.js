@@ -8,8 +8,8 @@ exports.run = function(client, message, args) {
 if(isNaN(args[0])) {
   var errembed = new Discord.MessageEmbed()
     .setColor("RANDOM")
-    .addField(`Misuse!', 'You should write a number!`)
-    .addField(`Proper Use:`, `${ayarlar.prefix}sil < number of messages to clear >`)
+    .addField(`Misuse!`, `You should write a number!`)
+    .addField(`Proper Use:`, `${ayarlar.prefix}clear < number of messages to clear >`)
 return message.channel.send(errembed);
 }
   
