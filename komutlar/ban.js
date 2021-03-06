@@ -14,12 +14,12 @@ return message.channel.send(`To Use This Command "\`Yönetici\`" You Must Have A
     if(user.id === message.author.id) return message.channel.send(acebot.setDescription('You can't ban yourself.'))
     if(user.id === client.user.id) return message.channel.send(acebot.setDescription('You can't ban the bot.'))
     if(user.id === message.guild.ownerID) return message.channel.send(acebot.setDescription ('You can't ban the server owner.'))
-    if (!message.guild.member(user).bannable) return message.channel.send(acebot.setDescription(`This person's role is above you or has the authority to Ban member`));
+    if (!message.guild.member(user).bannable) return message.channel.send(acebot.setDescription('This person's role is above you or has the authority to Ban member'));
 
 
 
    message.guild.members.cache.get(user.id).ban({reason: `${sebep}`})
-      let embed = acebot.setDescription(`${user} named user ${message.author.tag} By \`${sebep}\` banned for reasons. `)
+      let embed = acebot.setDescription(`${user} named user ${message.author.tag} By \`${sebep}\` banned for reasons`)
 
 };
  
