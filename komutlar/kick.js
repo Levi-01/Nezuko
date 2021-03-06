@@ -10,7 +10,7 @@ exports.run = async(client, message, args) => {
      if(!kişi) {
        const ikrud = new Discord.MessageEmbed()
 .setColor("#ff0000")
-.setDescription(`**${prefix}kick ```@user```**`)
+.setDescription(`**${prefix}kick ```user```**`)
 return message.channel.send(ikrud)
      }
      if(!sebep) sebep = `Sebep: Belirtilmemiş`
