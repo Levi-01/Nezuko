@@ -11,7 +11,6 @@ exports.run = async(client, message, args) => {
        const ikrud = new Discord.MessageEmbed()
 .setColor("#ff0000")
 .setDescription(`${prefix}kick User`)
-.then(x => x.delete({ timeout: 5000 }));
 return message.channel.send(ikrud)
      }
      if(!sebep) sebep = `Sebep: Belirtilmemiş`
