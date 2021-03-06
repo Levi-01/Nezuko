@@ -1,3 +1,4 @@
+
 const Discord = require('discord.js');
 const db = require('quick.db');
 const ayarlar = require("../ayarlar.json");
@@ -11,10 +12,10 @@ return message.channel.send(`To Use This Command "\`Yönetici\`" You Must Have A
     let prefix = ayarlar.prefix
     let sebep = args.slice(1).join(' ') || "Belirtilmemiş."
     if(!user) return message.channel.send(acebot.setDescription(`**> Misuse...**\n> **You should tag a contact!**\n > Sample Usage: **\`${prefix}ban @user < reason >\`**`))
-    if(user.id === message.author.id) return message.channel.send(acebot.setDescription('You can't ban yourself.'))
-    if(user.id === client.user.id) return message.channel.send(acebot.setDescription('You can't ban the bot.'))
-    if(user.id === message.guild.ownerID) return message.channel.send(acebot.setDescription ('You can't ban the server owner.'))
-    if (!message.guild.member(user).bannable) return message.channel.send(acebot.setDescription('This person's role is above you or has the authority to Ban member'));
+    if(user.id === message.author.id) return message.channel.send(acebot.setDescription('You can t ban yourself'))
+    if(user.id === client.user.id) return message.channel.send(acebot.setDescription('You can t ban the bot.'))
+    if(user.id === message.guild.ownerID) return message.channel.send(acebot.setDescription ('You can t ban the server owner.'))
+    if (!message.guild.member(user).bannable) return message.channel.send(acebot.setDescription('This person s role is above you or has the authority to Ban member'));
 
 
 
