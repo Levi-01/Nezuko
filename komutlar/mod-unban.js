@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-module.exports.run = async (client, message, args) => {
+exports.run = async (client, message, args) => {
   if(!message.member.roles.some(r => ["ROL ID" , "ROL ID"].includes(r.id)))
   return message.reply("Bu komudu kulanmak için yeterli yetkiye sahip değilsin!") 
 
