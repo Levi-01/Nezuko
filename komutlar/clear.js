@@ -3,7 +3,7 @@ const ayarlar = require('../ayarlar.json');
 
 exports.run = function(client, message, args) {
   
-  if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply(`To use this command, you must have **Manage Messages** permission!`);
+  if (!message.member.hasPermission("MANAGE_MESSAGES") return message.reply(`To use this command, you must have **Manage Messages** permission!`);
   
 if(isNaN(args[0])) {
   var errembed = new Discord.MessageEmbed()
