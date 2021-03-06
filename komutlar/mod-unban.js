@@ -49,7 +49,7 @@ exports.conf = {
     permLevel: 0
 };
   exports.help = {
-    name: 'ban',      
+    name: 'unban',      
     description: 'Belirtilen Kişiyi Sunucudan Kickler',
-    usage: 'ban <kullanıcı>'
+    usage: 'unban <kullanıcı>'
 };
