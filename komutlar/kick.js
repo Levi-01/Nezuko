@@ -3,7 +3,7 @@ const db = require("quick.db");
 module.exports.run = async (bot, message, args) => {
   if (!message.member.hasPermission("KICK_MEMBERS")) {
     const embed = new Discord.MessageEmbed()
-      .setDescription("```Ne yazık ki bu komutu kullanmaya yetkin yok.```")
+      .setDescription("```Unfortunately, you are not authorized to use this command.```")
       .setColor("BLACK");
  
     message.channel.send(embed);
@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
   if (!u) {
     return message.channel.send(
       new Discord.MessageEmbed()
-        .setDescription("Lütfen atılacak kişiyi etiketleyiniz!")
+        .setDescription("Please tag the person to discard!")
         .setColor("BLACK")
         .setFooter(bot.user.username, bot.user.avatarURL)
     );
@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args) => {
  
   const embed = new Discord.MessageEmbed()
     .setColor("BLACK")
-    .setDescription(`${u} Adlı şahsın sunucudan atılmasını onaylıyor musunuz?`)
+    .setDescription(`${u}Are you sure wat to kick this?`)
     .setFooter(bot.user.username, bot.user.avatarURL);
   message.channel.send(embed).then(async function(sentEmbed) {
     const emojiArray = ["✅"];
@@ -36,7 +36,7 @@ module.exports.run = async (bot, message, args) => {
     reactions.on("collect", async function(reaction) {
       if (reaction.emoji.name === "✅") {
         message.channel.send(
-          `İşlem onaylandı! ${u} adlı şahıs sunucudan atıldı!`
+          `Transaction confirmed! ${u} the named person was ejected from the server!`
         );
  
         message.guild.member(u).kick();
