@@ -51,7 +51,7 @@ message.channel.send(kinsta);
 exports.conf = {
   enabled: true, 
   guildOnly: false, 
-  aliases: ['corona','covid19','covid-19'],
+  aliases: ['korona','corona','covid19','covid-19'],
   permLevel: 0 
 };
 
