@@ -35,7 +35,7 @@ return message.channel.send(peka)
      message.guild.member(kişi).kick({ reason: `Sebep: ${sebep} | Kullanıcıyı Atan Kişi ${message.author.tag}` })
  const ikrudka = new Discord.MessageEmbed()
 .setColor("#ffcb00")
-.setDescription(`**<@${kişi.user.tag}> Named Member Kicked From Server**`)
+.setDescription(`**<@${kişi.id}> Named Member Kicked From Server**`)
 return message.channel.send(ikrudka)
    }
 exports.conf = {
