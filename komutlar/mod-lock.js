@@ -4,7 +4,7 @@ message.channel.createOverwrite(every, {
     SEND_MESSAGES: false
   });
 
-  message.channel.send('**🔒has been locked**');
+  message.channel.send('**🔒has been locked.**');
 };
 
 exports.conf = {
