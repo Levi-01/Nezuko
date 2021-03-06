@@ -8,7 +8,7 @@ var prefix = ayarlar.prefix
         var kisi = message.mentions.members.first()
 
         if(!message.member.hasPermission("MANAGE_ROLES")) {
-        return message.channel.send('You don't have the authority to do this!')
+        return message.channel.send('You don t have the authority to do this!')
         }
 
         if(!rolid) return message.channel.send(`role <tag> user <tag> `)
