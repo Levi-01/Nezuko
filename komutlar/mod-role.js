@@ -8,10 +8,10 @@ var prefix = ayarlar.prefix
         var kisi = message.mentions.members.first()
 
         if(!message.member.hasPermission("MANAGE_ROLES")) {
-        return message.channel.send('Bunu Gerçekleştirmek İçin Gereken Yetkiniz Yok!')
+        return message.channel.send('You don't have the authority to do this!!')
         }
 
-        if(!rolid) return message.channel.send(`Verilecek Rolü Etiketlemelisin! \n **Doğru Kullanım: "${prefix}yetki-ver <rol> <kullanıcı>"** `)
+        if(!rolid) return message.channel.send(`role <tag> user <tag> `)
         if(!kisi) return message.channel.send(`Rol Verilecek Kullanıcıyı Etiketlemelisin! \n **Doğru Kullanım: "${prefix}yetki-ver <rol> <kullanıcı>"** `)
 
         kisi.roles.add(rolid)
