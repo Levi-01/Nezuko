@@ -20,7 +20,7 @@ return message.channel.send(`To Use This Command "\`Yönetici\`" You Must Have A
 
 
    message.guild.members.cache.get(user.id).ban({reason: `${sebep}`})
-      let embed = acebot.setDescription(`**banned from the server**`)
+      let embed = acebot.setDescription(`**<@${kişi.id}> banned from the server**`)
 
 };
  
