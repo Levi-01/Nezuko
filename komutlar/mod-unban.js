@@ -1,50 +1,44 @@
 const Discord = require('discord.js');
+const fs = require('fs');
 
-exports.run = async(client, message, args) => {
+exports.run = async (client, message, args) => {
+
+  const db = require('quick.db');
+  
+  const fynx = require("../ayarlar/bot.json");
+let prefix = await db.fetch(`prefix.${message.guild.id}`) || fynx.prefix;
+    
+  if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send(`<a:sag2:786703055889760346>  **Bu komutu kullanabilmek için "\`Üyeleri Yasakla\`" yetkisine sahip olmalısın.**`);
   
 
- var guild = message.guild;
- var banlayan = message.author.tag;
- var kisi = message.mentions.users.first() || client.users.resolve(args[0]) || client.users.cache.find(u => u.username === args[0]) || client.users.cache.get(args[0]);
- if(!kisi) return message.reply("Banlayacağım Kişiyi Belirtmen Gerekiyor `ID / @kullanici / username`")
- //var gun = args.slice(1).join(' ') ? `${args.slice(1).join(' ')}` :"";
- var neden = args.slice(1).join(' ') 
- let banxx = await message.guild.fetchBans();
+  let user = args[0];
+  let reason = args.slice(1).join(' ');
+  if (db.has(`log_${message.guild.id}`) === false) return message.channel.send(`<a:sag2:786703055889760346> **Mod Log Kanalı Ayarlanmamış | ${prefix}modlog #kanal**`);
+  let modlog = message.guild.channels.cache.get(db.fetch(`log_${message.guild.id}`).replace("<#", "").replace(">", ""));
+ if (isNaN(user)) return message.channel.send('<a:sag2:786703055889760346> **Lütfen Banını Açmak İstediğiniz Üyeninin ID sini Girin**');
+  if (reason.length < 1) return message.channel.send('<a:sag2:786703055889760346> **Lütfen Sebep Giriniz**');
+ 
+  
+  const embed = new Discord.MessageEmbed()
+  .setColor("#ffd100")
+  .addField('<a:sag2:786703055889760346> İşlem', 'Ban Kaldırma')
+  .addField('<a:sag2:786703055889760346> Banı Açılan Üye', `(${user})`)
+  .addField('<a:sag2:786703055889760346> Banı Açan Yetkili', `${message.author.username}#${message.author.discriminator}`)
+  .addField('<a:sag2:786703055889760346> Banı Açma Sebebi', "```" + reason + "```")
+  modlog.send(embed);
+  message.guild.members.unban(user);
+  
 
-if (!banxx.get(kisi.id)) return message.reply(":x: Kişi Yasaklanmamış")
+  
+  const embed2 = new Discord.MessageEmbed()
+  .setColor("#ffd100")
+  .setDescription(`<a:sag2:786703055889760346> Belirtiğiniz İD'nin Banı Açıldı`)
+  message.channel.send(embed2)
 
-if(neden) {
-  try {
-  await message.channel.send(`${kisi.tag} adlı kullanıcının banı açıldı. \nNedeni: **${neden}**`)
-  await guild.members.unban(kisi.id, neden);
-} catch (error) {
-  message.reply("Bir Sorun Oldu Lütfen Botun Geliştiricisi veya Yapımcısıyla İletişime Geçiniz!")
-  console.log(error)
-}
-} else {
-  try {
-    await message.channel.send(`${kisi.tag} adlı kullanıcının banı açıldı.`)
-    await guild.members.unban(kisi.id, neden);
-  } catch (error) {
-    message.reply("Bir Sorun Oldu Lütfen Botun Geliştiricisi veya Yapımcısıyla İletişime Geçiniz!")
-    console.log(error)
-  }
-
-}
-
-
-
-
+  
 };
 
-
-exports.conf = {
-  aliases: [],
-  permLevel: 2
-};
-
-exports.help = {
+exports.config = {
   name: 'unban',
-  description: 'Botun Pingini Gösterir !',
-  usage: 'unban'
+  aliases: ['unban','yasak-kaldır','yasak-aç','ban-kaldır']
 };
