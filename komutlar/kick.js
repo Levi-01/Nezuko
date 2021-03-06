@@ -11,6 +11,7 @@ exports.run = async(client, message, args) => {
        const ikrud = new Discord.MessageEmbed()
 .setColor("#ff0000")
 .setDescription(`${prefix}kick User`)
+.then(x => x.delete({ timeout: 5000 }));
 return message.channel.send(ikrud)
      }
      if(!sebep) sebep = `Sebep: Belirtilmemiş`
@@ -18,18 +19,21 @@ return message.channel.send(ikrud)
        const pekabot = new Discord.MessageEmbed()
 .setColor("#ff0000")
 .setDescription(`** You Can't Discard a Server Owner!**`)
+.then(x => x.delete({ timeout: 5000 }));
 return message.channel.send(pekabot)
      }
      if(kişi.id === client.user.id) {
        const pekabot = new Discord.MessageEmbed()
 .setColor("#ff0000")
 .setDescription(`** You're Going to Dump Me?**`)
+.then(x => x.delete({ timeout: 5000 }));
 return message.channel.send(pekabot)
      }
      if(kişi.id === message.author.id) {
        const peka = new Discord.MessageEmbed()
 .setColor("#ff0000")
 .setDescription(`** You Can't Throw Yourself Off the Server!**`)
+.then(x => x.delete({ timeout: 5000 }));
 return message.channel.send(peka)
      }
      message.guild.member(kişi).kick({ reason: `Sebep: ${sebep} | Kullanıcıyı Atan Kişi ${message.author.tag}` })
