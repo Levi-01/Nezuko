@@ -12,10 +12,10 @@ var prefix = ayarlar.prefix
         }
 
         if(!rolid) return message.channel.send(`role <tag> user <tag> `)
-        if(!kisi) return message.channel.send(`Rol Verilecek Kullanıcıyı Etiketlemelisin! \n **Doğru Kullanım: "${prefix}yetki-ver <rol> <kullanıcı>"** `)
+        if(!kisi) return message.channel.send(`You Must Tag the User to Be Cast! \n ** Proper Use: "${prefix} Authorize it<role><user>"** `)
 
         kisi.roles.add(rolid)
-        return message.channel.send(`İstediğiniz Gibi ${kisi} Adlı Kullanıcıya , ${rolid} Yetkisini Verdim! `)
+        return message.channel.send(`uaser  ${kisi} update , ${rolid} Successfuly!`)
 
     }
 
