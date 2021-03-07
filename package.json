@@ -18,6 +18,7 @@
     "moment": "^2.27.0",
     "moment-duration-format": "^2.2.2",
     "quick.db": "^7.1.1",
+    "superagent": "^4.1.0",
     "common-tags": "^1.8.0",
     "request-promise-native": "^1.0.9",
     "random-puppy": "^1.1.0",
