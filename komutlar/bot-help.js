@@ -15,11 +15,9 @@ const embed = new Discord.MessageEmbed()
 .setDescription(`
 > __Global Commands__\`✨\`
 avatar / info /
-ping / gifs
-> __Gifs Commands__\`🔥\`
-neon / boy / girl /
-anime / emoji / couple /
-giphy / baby / smoke / bff / movie 
+ping / gifs / moderation
+> __Vip Commands__\`🔥\`
+gifs / moderation / funny / games
 `)
 
 
