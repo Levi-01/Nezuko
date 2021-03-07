@@ -10,7 +10,7 @@ const embed = new Discord.MessageEmbed()
     
 .setColor('BLACK') 
 .setTitle(`My prefix is (${prefix})`)
-.setThumbnail(client.author.avatarURL())
+.setThumbnail(message.author.avatarURL())
 .setTimestamp()
 .setDescription(`
 > __Moderation Commands__\`⚙️\`
@@ -19,7 +19,7 @@ clear / lock / unlock / nickname / role / kick / ban / unban
 
 
 
-.setFooter(`${message.author.tag} `, message.author.avatarURL())
+.setFooter(`${message.author.tag} `, client.user.avatarURL())
 message.channel.send({embed});
 }
 
