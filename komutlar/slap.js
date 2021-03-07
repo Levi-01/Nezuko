@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const superagent = require('superagent');
-const customisation = require('../customisation.json');
+const ayarlar = require('./ayarlar.json');
 
 exports.run = async (client, message, args, tools) => {
     if (!message.mentions.users.first()) return message.reply("kime vurcam ");
