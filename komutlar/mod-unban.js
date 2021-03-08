@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js')
+const Discord = require('discord.js')
 const datab = require('quick.db')
 const moment = require('moment')
 exports.run = async (client, message, args) => {
