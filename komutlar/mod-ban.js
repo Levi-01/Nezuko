@@ -38,6 +38,7 @@ return message.channel.send(peka)
      message.guild.member(kişi).ban({ reason: `Reason: ${sebep} | By: ${message.author.tag}` })
  const ikrudka = new Discord.MessageEmbed()
 .setColor("#ffcb00")
+.setImage("https://i.pinimg.com/originals/84/5d/f1/845df1aefc6a5e37ae575327a0cc6e43.gif")
 .setDescription(`**<@${kişi.id}> Named Member Banned From Server**`)
 return message.channel.send(ikrudka)
    }
