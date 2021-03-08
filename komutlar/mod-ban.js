@@ -13,7 +13,7 @@ exports.run = async(client, message, args) => {
 .setDescription(`${prefix}ban User`)
 return message.channel.send(ikrud)
      }
-     if(!sebep) sebep = `Sebep: Belirtilmemiş`
+     if(!sebep) sebep = `Cause: Unspecified`
      if(kişi.id === message.guild.ownerID) {
        const pekabot = new Discord.MessageEmbed()
 .setColor("#ff0000")
