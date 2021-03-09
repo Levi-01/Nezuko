@@ -38,6 +38,6 @@ exports.help = {
 }
 
 exports.conf = {
-    aliases: ["tf"],
+    aliases: ["tf","send"],
     cooldown: 15
 }
