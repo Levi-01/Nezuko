@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
         } else {
             db.set(`lastDaily.${message.author.id}`, Date.now());
             db.add(`account.${message.author.id}.balance`, amount);
-            return message.channel.send(`Great **${message.author.tag}!** You've been received 500 dollars!`);
+            return message.channel.send(`💰 **${message.author.tag}!** here is your daily **💵500 dollars!** `);
         }
 
     } catch (error) {
