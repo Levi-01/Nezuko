@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const slots = ["🦁", "🦊", "🐼", "🐻", "🐸"];
+const slots = ["🦁", "🦊", "🐼", "🐻", "🐸","🐱","🐶"];
 
 exports.run = function(client, message) {
   var slot1 = slots[Math.floor(Math.random() * slots.length)];
