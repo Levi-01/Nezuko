@@ -8,6 +8,14 @@ exports.run = function(client, message) {
   var slot2 = slots[Math.floor(Math.random() * slots.length)];
   var slot3 = slots[Math.floor(Math.random() * slots.length)];
 
+if (cooldown.has(message.author.id)) {
+      return message.channel.send(`⏱ | Please wait for 5 second and try again!`).then(m=>{m.delete({timeout:cdtime * 200})})
+    }
+    cooldown.add(message.author.id);
+    setTimeout(() => {
+      cooldown.delete(message.author.id);
+    }, cdtime * 1000);
+
   if (slot1 === slot2 && slot1 === slot3) {
     message.channel.send(`
 \`___Slot___\`
@@ -27,13 +35,6 @@ ___ you lost___\`
   }
 };
 
-if (cooldown.has(message.author.id)) {
-      return message.channel.send(`⏱ | Please wait for 5 second and try again!`).then(m=>{m.delete({timeout:cdtime * 200})})
-    }
-    cooldown.add(message.author.id);
-    setTimeout(() => {
-      cooldown.delete(message.author.id);
-    }, cdtime * 1000);
 
 exports.conf = {
   enabled: true,
