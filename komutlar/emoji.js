@@ -25,7 +25,7 @@ exports.run = (client, message, args) => {
 
     .addField("Emoji ID", `${emoji.id}`)
 
-    .addField("Link", `${emoji.url}`)
+    .setURL("Link", `${emoji.url}`)
 
     .setTimestamp()
 
