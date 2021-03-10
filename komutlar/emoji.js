@@ -39,7 +39,7 @@ exports.conf = {
 
     guildOnly: false,
 
-    aliases: ["emoji"],
+    aliases: ["emojid"],
 
     permLevel: 0
 
