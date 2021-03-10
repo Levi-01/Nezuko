@@ -11,7 +11,7 @@ exports.run = (client, message, args) => {
        const embed2 = new Discord.RichEmbed()
 
      .setColor("BLACK")
-     .setDescription("Emoji İsmi Belirtmediniz?")
+     .setDescription("You Didn't Specify an Emoji Name?")
        
        return message.channel.send(embed2)
 
@@ -21,7 +21,7 @@ exports.run = (client, message, args) => {
 
     .setColor("RANDOM")
 
-    .addField("Emojinin ismi", `${emojiname}`)
+    .addField("Emoji Name", `${emojiname}`)
 
     .addField("Emoji ID", `${emoji.id}`)
 
