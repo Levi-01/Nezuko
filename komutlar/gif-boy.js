@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
 
-let replies = ["https://cdn.discordapp.com/attachments/694693923486171177/737203415339499621/a_c3451f3e42065b560180028d3a62ef5a.gif",
+let replies = ["https://media.discordapp.net/attachments/818895758622588938/818917170310283284/image0.gif","https://media.discordapp.net/attachments/818895758622588938/818917178631782400/image0.gif","https://media.discordapp.net/attachments/818895758622588938/818917182519640084/image0.gif","https://media.discordapp.net/attachments/818895758622588938/818917186302246923/image0.gif","https://media.discordapp.net/attachments/818895758622588938/818917313235517491/image0.gif","https://cdn.discordapp.com/attachments/694693923486171177/737203415339499621/a_c3451f3e42065b560180028d3a62ef5a.gif",
     "https://cdn.discordapp.com/attachments/694693923486171177/737219168822362183/a_9c8d6cb51559b033674ed8dd16234ee7.gif",
     "https://cdn.discordapp.com/attachments/694693923486171177/737219065977765888/a_cb483fd9bfa2068e5b57aa6cf973986e.gif",
     "https://cdn.discordapp.com/attachments/694693923486171177/737203076691394570/a_e8727598fec06c471cc305358b97596b.gif",
