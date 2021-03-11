@@ -1,69 +1,51 @@
 const Discord = require("discord.js");
 const db = require('quick.db');
 
-exports.run = async (bot, message, args) => {
 
-        if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("**You Dont Have The Permissions To Unban Someone! - [BAN_MEMBERS]**")
+exports.run = async (client, message, args) => {
+    //Start
+    message.delete();
+    if (!message.member.hasPermission("BAN_MEMBERS"))
+      return message.channel.send(
+        `You Don't Have Permission To Use This Command!`
+      );
 
-        if (!args[0]) return message.channel.send("**Please Enter A Name!**")
-      
-        let bannedMemberInfo = await message.guild.fetchBans()
+    let Member = message.mentions.users.first();
 
-        let bannedMember;
-        bannedMember = bannedMemberInfo.find(b => b.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || bannedMemberInfo.get(args[0]) || bannedMemberInfo.find(bm => bm.user.tag.toLowerCase() === args[0].toLocaleLowerCase());
-        if (!bannedMember) return message.channel.send("**Please Provide A Valid Username, Tag Or ID Or The User Is Banned!**")
+    if (!Member)
+      return message.channel.send(
+        `Please Mention A Member That You Want To Ban!`
+      );
 
-        let reason = args.slice(1).join(" ")
+    if (!message.guild.members.cache.get(Member.id))
+      return message.channel.send(`Please Mention A Valid Member!`);
 
-        if (!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send("**I Don't Have Permissions To ban Someone! - [BAN_MEMBERS]**")
-        try {
-            if (reason) {
-                message.guild.members.ban(bannedMember.user.id, reason)
-                var sembed = new Discord.MessageEmbed()
-                    .setColor("GREEN")
-                    .setAuthor(message.guild.name, message.guild.iconURL())
-                    .setDescription(`**${bannedMember.user.tag} has been unbanned for ${reason}**`)
-                message.channel.send(sembed)
-            } else {
-                message.guild.members.ban(bannedMember.user.id, reason)
-                var sembed2 = new Discord.MessageEmbed()
-                    .setColor("GREEN")
-                    .setAuthor(message.guild.name, message.guild.iconURL())
-                    .setDescription(`**${bannedMember.user.tag} has been unbanned**`)
-                message.channel.send(sembed2)
-            }
-        } catch {
-            
-        }
- let channel = db.fetch(`modlog_${message.guild.id}`)
-        if (!channel) return;
+    if (Member.id === message.author.id)
+      return message.channel.send(`You Can't Ban Your Self!`);
 
-        let embed = new Discord.MessageEmbed()
-            .setColor("#ff0000")
-            .setThumbnail(bannedMember.user.displayAvatarURL({ dynamic: true }))
-            .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL())
-            .addField("**Moderation**", "unban")
-            .addField("**Unbanned**", `${bannedMember.user.username}`)
-            .addField("**ID**", `${bannedMember.user.id}`)
-            .addField("**Moderator**", message.author.username)
-            .addField("**Reason**", `${reason}` || "**No Reason**")
-            .addField("**Date**", message.createdAt.toLocaleString())
-            .setFooter(message.guild.name, message.guild.iconURL())
-            .setTimestamp();
+    if (Member.id === client.user.id)
+      return message.channel.send(`Please Don't Ban Me ;-;`);
 
-        var sChannel = message.guild.channels.cache.get(channel)
-        if (!sChannel) return;
-        sChannel.send(embed)
-    }
-exports.conf = {
-  enabled: true,
-  guildOnly: false,
-  aliases: ["ban"],
-  permLevel: 0
-};
+    if (Member.id === message.guild.owner.user.id)
+      return message.channel.send(`You Can't Ban Owner Of Server!`);
 
-exports.help = {
-  name: "ban",
-  description: "banned",
-  usage: "ban"
-};
+    let Reason = args.slice(1).join(" ");
+
+    let User = message.guild.member(Member);
+
+    if (!User.bannable) return message.channel.send(`I Can't Ban That Member!`);
+
+    try {
+      console.log(`Member Is Going To Get Ban!`);
+      setTimeout(function() {
+        User.ban({ reason: `${Reason || "No Reason Provided!"}` });
+      }, 2000);
+      let embed = new Discord.MessageEmbed()
+        .setColor('RED')
+        .setTitle(`Member Banned!`)
+        .addField(`Moderator`, `${message.author.tag} (${message.author.id}`)
+        .addField(`Banned Member`, `${Member.tag} (${Member.id})`)
+        .addField(`Reason`, `${Reason || "No Reason Provided!"}`)
+        .setFooter(`Requested by ${message.author.username}`)
+        .setTimestamp();
+      if (User && Member.bot === false)
