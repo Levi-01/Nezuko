@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
         if(!User)return message.channel.send(`This is not a user on the server! Please specify a valid user..`)
         let sebep = args.slice(1).join(" ")
         if(!sebep) return message.channel.send(`Please give me a reason! You can't throw someone away for no reason, can you? `)
-        if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send(`Bu komutu kullanabilmek için \`Ban Members\` yetkisine sahip olmalısınız.`);
+        if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send(`**I Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**`);
         message.guild.members.ban(User, { reason: sebep });
         const Embed = new Discord.MessageEmbed()
         .setTitle(`You Fired a User!`)
