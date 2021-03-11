@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 exports.run = async (bot, message, args) => { 
     const apiKey = message.client.apiKeys.catApi;
     try {
-      const res = await fetch('https://api.tenorapi.com/v1/images/search', { headers: { 'TW6LBHJR1ZWL': apiKey }});
+      const res = await fetch('https://api.tenor.com/v1/images/search', { headers: { 'TW6LBHJR1ZWL': apiKey }});
       const img = (await res.json())[0].url;
       const embed = new Discord.MessageEmbed()
         .setTitle('🐱  Meow!  🐱')
