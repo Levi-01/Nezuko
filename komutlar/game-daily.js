@@ -5,7 +5,7 @@ let ms = require("parse-ms");
 exports.run = async (client, message, args) => {
     let pad_zero = num => (num < 10 ? '0' : '') + num;
     let cooldown = 8.64e+7; // 24 Hours in ms.
-    let amount = 500; // How much user will get it in their dailies.
+    let amount = 1000; // How much user will get it in their dailies.
 
     let lastDaily = await db.get(`lastDaily.${message.author.id}`);
     let buck = await db.get(`account.${message.author.id}.balance`);
@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
         } else {
             db.set(`lastDaily.${message.author.id}`, Date.now());
             db.add(`account.${message.author.id}.balance`, amount);
-            return message.channel.send(`💰 **${message.author.tag}!** here is your daily **💵500 dollars!** `);
+            return message.channel.send(`💰 **${message.author.tag}!** here is your daily **💵 ${amount} dollars!** `);
         }
 
     } catch (error) {
