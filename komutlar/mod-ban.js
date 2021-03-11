@@ -3,7 +3,7 @@ const db = require('quick.db');
 
 exports.run = async (client, message, args) => {
   
- if(!args[0])return message.channel.send(`Please specify the person you want to remove.`)
+ if(!args[0])return message.channel.send(`**Please Enter A Name!** `)
         let User = message.mentions.users.first() || message.guild.members.cache.get(args[0])
         if(!User)return message.channel.send(`This is not a user on the server! Please specify a valid user..`)
         let sebep = args.slice(1).join(" ")
