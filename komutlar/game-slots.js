@@ -13,6 +13,8 @@ exports.run = async (bot, message, args) => {
     if (isNaN(amount)) return message.channel.send("The amount was not a number.");
     if (amount > balance || !balance || balance === 0) return message.channel.send("You don't have enough money."); 
 
+    if (amount < 200) return message.channel.send("You don't have enough money for gambling. The minimum was $200.");
+  
     let number = []
     for (let i = 0; i < 3; i++) { number[i] = Math.floor(Math.random() * slotItems.length); }
 
@@ -23,7 +25,8 @@ exports.run = async (bot, message, args) => {
         amount *= 3
         win = true;
     }
-    if (win) {
+  
+  if (win) {
         let slotsEmbed1 = new Discord.MessageEmbed()
             .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\nYou won ${amount} coins`)
             .setColor("GREEN")
