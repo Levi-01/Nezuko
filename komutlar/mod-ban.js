@@ -1,74 +1,62 @@
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const db = require('quick.db');
 
+exports.run = async (bot, message, args) => {
+        try {
+            if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("**You Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**");
+            if (!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send("**I Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**");
+            if (!args[0]) return message.channel.send("**Please Provide A User To Ban!**")
 
-exports.run = async (client, message, args) => {
-    //Start
-    message.delete();
-    if (!message.member.hasPermission("BAN_MEMBERS"))
-      return message.channel.send(
-        `You Don't Have Permission To Use This Command!`
-      );
+            let banMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
+            if (!banMember) return message.channel.send("**User Is Not In The Guild**");
+            if (banMember === message.member) return message.channel.send("**You Cannot Ban Yourself**")
 
-    let Member = message.mentions.users.first();
+            var reason = args.slice(1).join(" ");
 
-    if (!Member)
-      return message.channel.send(
-        `Please Mention A Member That You Want To Ban!`
-      );
+            if (!banMember.bannable) return message.channel.send("**Cant Kick That User**")
+            try {
+            banMember.send(`**Hello, You Have Been Banned From ${message.guild.name} for - ${reason || "No Reason"}**`).then(() =>
+                message.guild.members.ban(banMember, { days: 7, reason: reason })).catch(() => null)
+            } catch {
+                message.guild.members.ban(banMember, { days: 7, reason: reason })
+            }
+            if (reason) {
+            var sembed = new Discord.MessageEmbed()
+                .setColor("GREEN")
+                .setAuthor(message.guild.name, message.guild.iconURL())
+                .setDescription(`**${banMember.user.username}** has been banned for ${reason}`)
+            message.channel.send(sembed)
+            } else {
+                var sembed2 = new Discord.MessageEmbed()
+                .setColor("GREEN")
+                .setAuthor(message.guild.name, message.guild.iconURL())
+                .setDescription(`**${banMember.user.username}** has been banned`)
+            message.channel.send(sembed2)
+            }
+            let channel = db.fetch(`modlog_${message.guild.id}`)
+            if (channel == null) return;
+            if (!channel) return;
 
-    if (!message.guild.members.cache.get(Member.id))
-      return message.channel.send(`Please Mention A Valid Member!`);
+            const embed = new Discord.MessageEmbed()
+                .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL())
+                .setColor("#ff0000")
+                .setThumbnail(banMember.user.displayAvatarURL({ dynamic: true }))
+                .setFooter(message.guild.name, message.guild.iconURL())
+                .addField("**Moderation**", "ban")
+                .addField("**Banned**", banMember.user.username)
+                .addField("**ID**", `${banMember.id}`)
+                .addField("**Banned By**", message.author.username)
+                .addField("**Reason**", `${reason || "**No Reason**"}`)
+                .addField("**Date**", message.createdAt.toLocaleString())
+                .setTimestamp();
 
-    if (Member.id === message.author.id)
-      return message.channel.send(`You Can't Ban Your Self!`);
-
-    if (Member.id === client.user.id)
-      return message.channel.send(`Please Don't Ban Me ;-;`);
-
-    if (Member.id === message.guild.owner.user.id)
-      return message.channel.send(`You Can't Ban Owner Of Server!`);
-
-    let Reason = args.slice(1).join(" ");
-
-    let User = message.guild.member(Member);
-
-    if (!User.bannable) return message.channel.send(`I Can't Ban That Member!`);
-
-    try {
-      console.log(`Member Is Going To Get Ban!`);
-      setTimeout(function() {
-        User.ban({ reason: `${Reason || "No Reason Provided!"}` });
-      }, 2000);
-      let embed = new Discord.MessageEmbed()
-        .setColor('RED')
-        .setTitle(`Member Banned!`)
-        .addField(`Moderator`, `${message.author.tag} (${message.author.id}`)
-        .addField(`Banned Member`, `${Member.tag} (${Member.id})`)
-        .addField(`Reason`, `${Reason || "No Reason Provided!"}`)
-        .setFooter(`Requested by ${message.author.username}`)
-        .setTimestamp();
-      if (User && Member.bot === false)
-        Member.send(
-          `You Have Been Banned From **${message.guild.name}** For ${Reason ||
-            "No Reason Provided!"}`
-        );
-      message.channel.send(embed);
-      console.log(
-        `User: ${Member.tag} (${Member.id}) Just Got Banned From ${
-          message.guild.name
-        } For ${Reason || "No Reason Provided!"}`
-      );
-    } catch (error) {
-      return message.channel
-        .send(
-          `I Can't Ban That Member Maybe Member Has Higher Role Than Me & My Role Is Lower Than Member!`
-        )
-        .then(() => console.log(error));
+            var sChannel = message.guild.channels.cache.get(channel)
+            if (!sChannel) return;
+            sChannel.send(embed)
+        } catch (e) {
+            return message.channel.send(`**${e.message}**`)
+        }
     }
-
-    //End
-  }
 
 exports.conf = {
   enabled: true,
