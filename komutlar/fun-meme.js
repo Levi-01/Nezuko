@@ -16,3 +16,16 @@ exports.run = async (bot, message, args) => {
         message.channel.send(embed);
     }
 }
+
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: ["meme"],
+  permLevel: 0
+};
+
+exports.help = {
+  name: "meme",
+  description: "meme",
+  usage: "meme"
+};
