@@ -5,20 +5,20 @@ const Discord = require("discord.js");
 exports.run = async (bot, message, args) => {
 
     let user = message.author;
-    let balance = db.get(`account.${message.author.id}.balance`);
+    let balance = await db.fetch(`money_${user.id}`)
     let amount = parseInt(args[0]);
     let win = false;
 
-    let amountmore = new MessageEmbed()
+    let moneymore = new Discord.MessageEmbed()
     .setColor("GREEN")
     .setDescription(`❌ You are betting more than you have`);
 
-    let amounthelp = new MessageEmbed()
+    let moneyhelp = new Discord.MessageEmbed()
     .setColor("GREEN")
     .setDescription(`❌ Specify an amount`); 
 
-    if (!amount) return message.channel.send(amounthelp);
-    if (amount > balance) return message.channel.send(amountmore);
+    if (!amount) return message.channel.send(moneyhelp);
+    if (amount > balance) return message.channel.send(moneymore);
 
     let number = []
     for (let i = 0; i < 3; i++) { number[i] = Math.floor(Math.random() * slotItems.length); }
@@ -31,20 +31,19 @@ exports.run = async (bot, message, args) => {
         win = true;
     }
     if (win) {
-        let slotsEmbed1 = new MessageEmbed()
+        let slotsEmbed1 = new Discord.MessageEmbed()
             .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\nYou won ${amount} coins`)
             .setColor("GREEN")
         message.channel.send(slotsEmbed1)
         db.add(`money_${user.id}`, amount)
     } else {
-        let slotsEmbed = new MessageEmbed()
+        let slotsEmbed = new Discord.MessageEmbed()
             .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\nYou lost ${amount} coins`)
             .setColor("GREEN")
         message.channel.send(slotsEmbed)
         db.subtract(`money_${user.id}`, amount)
     }
 
-}
 }
 
 exports.conf = {
