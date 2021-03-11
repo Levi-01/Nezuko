@@ -1,20 +1,25 @@
 const slotItems = ["🍇", "🍉", "🍌", "🍎", "🍒"];
 const db = require("quick.db");
-const Discord = require("discord.js");  
+const Discord = require('discord.js');  
 
 exports.run = async (bot, message, args) => {
 
     let user = message.author;
-    let balance = await db.fetch(`money_${user.id}`)
+    let balance = await db.fetch(`amount_${user.id}`)
     let amount = parseInt(args[0]);
     let win = false;
 
-    if (!amount) return message.channel.send("Please insert an amount first.");
-    if (isNaN(amount)) return message.channel.send("The amount was not a number.");
-    if (amount > balance || !balance || balance === 0) return message.channel.send("You don't have enough money."); 
+    let moneymore = new Discord.MessageEmbed()
+    .setColor("GREEN")
+    .setDescription(`❌ You are betting more than you have`);
 
-    if (amount < 200) return message.channel.send("You don't have enough money for gambling. The minimum was $200.");
-  
+    let moneyhelp = new Discord.MessageEmbed()
+    .setColor("GREEN")
+    .setDescription(`❌ Specify an amount`); 
+
+    if (!amount) return message.channel.send(moneyhelp);
+    if (amount > balance) return message.channel.send(moneymore);
+
     let number = []
     for (let i = 0; i < 3; i++) { number[i] = Math.floor(Math.random() * slotItems.length); }
 
@@ -25,8 +30,7 @@ exports.run = async (bot, message, args) => {
         amount *= 3
         win = true;
     }
-  
-  if (win) {
+    if (win) {
         let slotsEmbed1 = new Discord.MessageEmbed()
             .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\nYou won ${amount} coins`)
             .setColor("GREEN")
@@ -35,22 +39,21 @@ exports.run = async (bot, message, args) => {
     } else {
         let slotsEmbed = new Discord.MessageEmbed()
             .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\nYou lost ${amount} coins`)
-            .setColor("GREEN")
+            .setColor("RED")
         message.channel.send(slotsEmbed)
         db.subtract(`money_${user.id}`, amount)
     }
 
 }
 
-exports.conf = {
-  enabled: true,
-  guildOnly: false,
-  aliases: ["slots"],
-  permLevel: 0
-};
-
 exports.help = {
-  name: "slots",
-  description: "Slots oyunu oynatır",
-  usage: "slots"
-};
+    name: "slot",
+    description: "An efficient way to double your money.",
+    usage: "",
+    example: "gamble 500"
+}
+
+exports.conf = {
+    aliases: ["slot"],
+    cooldown: 5
+}
