@@ -49,3 +49,36 @@ exports.run = async (client, message, args) => {
         .setFooter(`Requested by ${message.author.username}`)
         .setTimestamp();
       if (User && Member.bot === false)
+        Member.send(
+          `You Have Been Banned From **${message.guild.name}** For ${Reason ||
+            "No Reason Provided!"}`
+        );
+      message.channel.send(embed);
+      console.log(
+        `User: ${Member.tag} (${Member.id}) Just Got Banned From ${
+          message.guild.name
+        } For ${Reason || "No Reason Provided!"}`
+      );
+    } catch (error) {
+      return message.channel
+        .send(
+          `I Can't Ban That Member Maybe Member Has Higher Role Than Me & My Role Is Lower Than Member!`
+        )
+        .then(() => console.log(error));
+    }
+
+    //End
+  }
+
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: ["ban"],
+  permLevel: 0
+};
+
+exports.help = {
+  name: "ban",
+  description: "banned",
+  usage: "ban"
+};
