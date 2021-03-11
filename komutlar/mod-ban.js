@@ -1,63 +1,42 @@
 const Discord = require('discord.js');
 const db = require('quick.db');
 
-exports.run = async (bot, message, args) => {
-        try {
-            if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("**You Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**");
-            if (!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send("**I Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**");
-            if (!args[0]) return message.channel.send("**Please Provide A User To Ban!**")
+exports.run = (client, message, args) => {
+  sql.get(`SELECT * FROM scores WHERE guildId ="${message.guild.id}"`).then(row => {
+  const prefixtouse = row.prefix
+  const usage = new Discord.RichEmbed()
+            .setColor(0x00A2E8)
+            .setThumbnail(client.user.avatarURL)
+            .setTitle("Command: " + prefixtouse + "ban")
+            .addField("Usage", prefixtouse + "ban @Someone <reason>")
+            .addField("Example", prefixtouse + "ban @Someone for ad links to other discords")
+            .setDescription("Description: " + "Bans a user from the current server");
 
-            let banMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
-            if (!banMember) return message.channel.send("**User Is Not In The Guild**");
-            if (banMember === message.member) return message.channel.send("**You Cannot Ban Yourself**")
+  if (message.member.hasPermission("BAN_MEMBERS")) {
+  if (!message.guild.member(client.user).hasPermission('BAN_MEMBERS')) return message.reply('Sorry, i dont have the perms to do this cmd i need BAN_MEMBERS. :x:')
+  if (message.mentions.users.size < 1) return message.channel.send(usage)
+  let user = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args.slice(0).join(" "));
+  if (user.highestRole.position >= message.member.highestRole.position) return message.reply('I cant ban that member. They are the same level as you or higher. :x:');
+  let reason = args.slice(1).join(' ') || `Moderator didn't give a reason.`;
+  let modlog = message.guild.channels.find(channel => channel.name == row.logschannel);
+  if (!message.guild.member(user).bannable) return message.reply(' I cant ban that member. This may be happening because they are above me. :x:');
+  message.guild.ban(user, 2);
+  message.channel.send("***The User has been successfully banned! :white_check_mark:***")
+  sql.run(`UPDATE scores SET casenumber = ${row.casenumber + 1} WHERE guildId = ${message.guild.id}`);
 
-            var reason = args.slice(1).join(" ");
-
-            if (!banMember.bannable) return message.channel.send("**Cant Kick That User**")
-            try {
-            banMember.send(`**Hello, You Have Been Banned From ${message.guild.name} for - ${reason || "No Reason"}**`).then(() =>
-                message.guild.members.ban(banMember, { days: 7, reason: reason })).catch(() => null)
-            } catch {
-                message.guild.members.ban(banMember, { days: 7, reason: reason })
-            }
-            if (reason) {
-            var sembed = new Discord.MessageEmbed()
-                .setColor("GREEN")
-                .setAuthor(message.guild.name, message.guild.iconURL())
-                .setDescription(`**${banMember.user.username}** has been banned for ${reason}`)
-            message.channel.send(sembed)
-            } else {
-                var sembed2 = new Discord.MessageEmbed()
-                .setColor("GREEN")
-                .setAuthor(message.guild.name, message.guild.iconURL())
-                .setDescription(`**${banMember.user.username}** has been banned`)
-            message.channel.send(sembed2)
-            }
-            let channel = db.fetch(`modlog_${message.guild.id}`)
-            if (channel == null) return;
-
-            if (!channel) return;
-
-            const embed = new Discord.MessageEmbed()
-                .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL())
-                .setColor("#ff0000")
-                .setThumbnail(banMember.user.displayAvatarURL({ dynamic: true }))
-                .setFooter(message.guild.name, message.guild.iconURL())
-                .addField("**Moderation**", "ban")
-                .addField("**Banned**", banMember.user.username)
-                .addField("**ID**", `${banMember.id}`)
-                .addField("**Banned By**", message.author.username)
-                .addField("**Reason**", `${reason || "**No Reason**"}`)
-                .addField("**Date**", message.createdAt.toLocaleString())
-                .setTimestamp();
-
-            var sChannel = message.guild.channels.cache.get(channel)
-            if (!sChannel) return;
-            sChannel.send(embed)
-        } catch (e) {
-            return message.channel.send(`**${e.message}**`)
-        }
+  const embed = new Discord.RichEmbed()
+    .setColor(0x00A2E8)
+    .setTitle("Case #" + row.casenumber + " | Action: Ban")
+    .addField("Moderator", message.author.tag + " (ID: " + message.author.id + ")")
+    .addField("User", user.user.tag + " (ID: " + user.user.id + ")")
+    .addField("Reason", reason, true)
+    .setFooter("Time used: " + message.createdAt.toDateString())
+    if (!modlog) return;
+    if (row.logsenabled === "disabled") return;
+    client.channels.get(modlog.id).send({embed});
     }
+  })
+}
 
 exports.conf = {
   enabled: true,
