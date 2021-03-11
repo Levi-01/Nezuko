@@ -1,44 +1,64 @@
-const Discord = require('discord.js')
-const db = require('quick.db')
-const ayarlar = require("../ayarlar.json")
-exports.run = async(client, message, args) => {
-  let prefix = ayarlar.prefix
-  if(!message.member.hasPermission("BAN_MEMBERS")) return;
-  if(!message.guild.members.cache.get(client.user.id).hasPermission("BAN_MEMBERS")) return;
-     let kişi = message.mentions.users.first()
-     let sebep = args.slice(1).join(" ")
-     if(!kişi) {
-       const ikrud = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`${prefix}ban User`)
-return message.channel.send(ikrud)
-     }
-     if(!sebep) sebep = `Cause: Unspecified`
-     if(kişi.id === message.guild.ownerID) {
-       const pekabot = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`** You Can t Discard a Server Owner!**`).then(x => x.delete({ timeout: 5000 }));
-return message.channel.send(pekabot)
-     }
-     if(kişi.id === client.user.id) {
-       const pekabot = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`** You re Going to Dump Me?**`).then(x => x.delete({ timeout: 5000 }));
-return message.channel.send(pekabot)
-     }
-     if(kişi.id === message.author.id) {
-       const peka = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`** You Can t Throw Yourself Off the Server!**`).then(x => x.delete({ timeout: 5000 }));
-return message.channel.send(peka)
-     }
-     message.guild.member(kişi).ban({ reason: `Reason: ${sebep} | By: ${message.author.tag}` })
- const ikrudka = new Discord.MessageEmbed()
-.setColor("#ffcb00")
-.setImage("https://i.pinimg.com/originals/84/5d/f1/845df1aefc6a5e37ae575327a0cc6e43.gif")
-.setDescription(`**<@${kişi.id}> Named Member Banned From Server**`)
-return message.channel.send(ikrudka)
-   }
+const Discord = require("discord.js");
+const db = require('quick.db');
+
+exports.run = async (bot, message, args) => {
+        try {
+            if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("**You Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**");
+            if (!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send("**I Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**");
+            if (!args[0]) return message.channel.send("**Please Provide A User To Ban!**")
+
+            let banMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
+            if (!banMember) return message.channel.send("**User Is Not In The Guild**");
+            if (banMember === message.member) return message.channel.send("**You Cannot Ban Yourself**")
+
+            var reason = args.slice(1).join(" ");
+
+            if (!banMember.bannable) return message.channel.send("**Cant Kick That User**")
+            try {
+            banMember.send(`**Hello, You Have Been Banned From ${message.guild.name} for - ${reason || "No Reason"}**`).then(() =>
+                message.guild.members.ban(banMember, { days: 7, reason: reason })).catch(() => null)
+            } catch {
+                message.guild.members.ban(banMember, { days: 7, reason: reason })
+            }
+            if (reason) {
+            var sembed = new Discord.MessageEmbed()
+                .setColor("RED")
+                .setAuthor(message.guild.name, message.guild.iconURL())
+                .setDescription(`**${banMember.user.username}** has been banned for ${reason}`)
+            message.channel.send(sembed)
+            } else {
+                var sembed2 = new Discord.MessageEmbed()
+                .setColor("RED")
+                .setAuthor(message.guild.name, message.guild.iconURL())
+                .setDescription(`**${banMember.user.username}** has been banned`)
+            message.channel.send(sembed2)
+            }
+            let channel = db.fetch(`modlog_${message.guild.id}`)
+            if (channel == null) return;
+
+            if (!channel) return;
+
+            const embed = new Discord.MessageEmbed()
+                .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL())
+                .setColor("#ff0000")
+                .setThumbnail(banMember.user.displayAvatarURL({ dynamic: true }))
+                .setFooter(message.guild.name, message.guild.iconURL())
+                .addField("**Moderation**", "ban")
+                .addField("**Banned**", banMember.user.username)
+                .addField("**ID**", `${banMember.id}`)
+                .addField("**Banned By**", message.author.username)
+                .addField("**Reason**", `${reason || "**No Reason**"}`)
+                .addField("**Date**", message.createdAt.toLocaleString())
+                .setTimestamp();
+
+            var sChannel = message.guild.channels.cache.get(channel)
+            if (!sChannel) return;
+            sChannel.send(embed)
+        } catch (e) {
+            return message.channel.send(`**${e.message}**`)
+        }
+    }
+
 exports.conf = {
     enabled: true,
     guildOnly: true,
@@ -47,6 +67,6 @@ exports.conf = {
 };
   exports.help = {
     name: 'ban',      
-    description: 'Belirtilen Kişiyi Sunucudan Kickler',
-    usage: 'ban <kullanıcı>'
+    description: 'Banned',
+    usage: 'ban'
 };
