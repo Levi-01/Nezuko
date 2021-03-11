@@ -35,8 +35,7 @@ exports.run = async (bot, message, args) => {
         } catch {
             
         }
-
-        let channel = db.fetch(`modlog_${message.guild.id}`)
+ let channel = db.fetch(`modlog_${message.guild.id}`)
         if (!channel) return;
 
         let embed = new Discord.MessageEmbed()
@@ -47,3 +46,24 @@ exports.run = async (bot, message, args) => {
             .addField("**Unbanned**", `${bannedMember.user.username}`)
             .addField("**ID**", `${bannedMember.user.id}`)
             .addField("**Moderator**", message.author.username)
+            .addField("**Reason**", `${reason}` || "**No Reason**")
+            .addField("**Date**", message.createdAt.toLocaleString())
+            .setFooter(message.guild.name, message.guild.iconURL())
+            .setTimestamp();
+
+        var sChannel = message.guild.channels.cache.get(channel)
+        if (!sChannel) return;
+        sChannel.send(embed)
+    }
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: ["unban"],
+  permLevel: 0
+};
+
+exports.help = {
+  name: "unban",
+  description: "Un banned",
+  usage: "unban"
+};
