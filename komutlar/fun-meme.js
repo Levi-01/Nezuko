@@ -10,8 +10,8 @@ exports.run = async (bot, message, args) => {
         const embed = new Discord.MessageEmbed()
             .setColor("RANDOM")
             .setImage(img)
-            .setTitle("meme!")
-            .setURL(`https://reddit.com/r/${random}`);
+            .setTitle("meme!");
+          
 
         message.channel.send(embed);
     }
