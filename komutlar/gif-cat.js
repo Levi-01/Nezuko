@@ -12,3 +12,24 @@ try {
 			return message.reply(`Oh no, an error occurred: \`${err.message}\`. Try again later!`);
 		}
 }
+exports.conf = {
+
+  enabled: true,
+
+  guildOnly: false,
+
+  aliases: ['cats'],
+
+  permLevel: 0
+
+};
+
+exports.help = {
+
+  name: 'neon',
+
+  description: 'lrowsxrd',
+
+  usage: 'neon'
+
+};
