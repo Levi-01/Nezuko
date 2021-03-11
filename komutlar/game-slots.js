@@ -9,16 +9,9 @@ exports.run = async (bot, message, args) => {
     let amount = parseInt(args[0]);
     let win = false;
 
-    let moneymore = new Discord.MessageEmbed()
-    .setColor("GREEN")
-    .setDescription(`❌ You are betting more than you have`);
-
-    let moneyhelp = new Discord.MessageEmbed()
-    .setColor("GREEN")
-    .setDescription(`❌ Specify an amount`); 
-
-    if (!amount) return message.channel.send(moneyhelp);
-    if (amount > balance) return message.channel.send(moneymore);
+    if (!amount) return message.channel.send("Please insert an amount first.");
+    if (isNaN(amount)) return message.channel.send("The amount was not a number.");
+    if (amount > balance || !balance || balance === 0) return message.channel.send("You don't have enough money."); 
 
     let number = []
     for (let i = 0; i < 3; i++) { number[i] = Math.floor(Math.random() * slotItems.length); }
