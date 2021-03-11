@@ -5,43 +5,43 @@ const Discord = require("discord.js");
 exports.run = async (bot, message, args) => {
 
     let user = message.author;
-    let moneydb = await db.fetch(`money_${user.id}`)
-    let money = parseInt(args[0]);
+    let balance = db.get(`account.${message.author.id}.balance`);
+    let amount = parseInt(args[0]);
     let win = false;
 
-    let moneymore = new MessageEmbed()
+    let amountmore = new MessageEmbed()
     .setColor("GREEN")
     .setDescription(`❌ You are betting more than you have`);
 
-    let moneyhelp = new MessageEmbed()
+    let amounthelp = new MessageEmbed()
     .setColor("GREEN")
     .setDescription(`❌ Specify an amount`); 
 
-    if (!money) return message.channel.send(moneyhelp);
-    if (money > moneydb) return message.channel.send(moneymore);
+    if (!amount) return message.channel.send(amounthelp);
+    if (amount > balance) return message.channel.send(amountmore);
 
     let number = []
     for (let i = 0; i < 3; i++) { number[i] = Math.floor(Math.random() * slotItems.length); }
 
     if (number[0] == number[1] && number[1] == number[2])  { 
-        money *= 9
+        amount *= 9
         win = true;
     } else if (number[0] == number[1] || number[0] == number[2] || number[1] == number[2]) { 
-        money *= 3
+        amount *= 3
         win = true;
     }
     if (win) {
         let slotsEmbed1 = new MessageEmbed()
-            .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\nYou won ${money} coins`)
+            .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\nYou won ${amount} coins`)
             .setColor("GREEN")
         message.channel.send(slotsEmbed1)
-        db.add(`money_${user.id}`, money)
+        db.add(`money_${user.id}`, amount)
     } else {
         let slotsEmbed = new MessageEmbed()
-            .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\nYou lost ${money} coins`)
+            .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\nYou lost ${amount} coins`)
             .setColor("GREEN")
         message.channel.send(slotsEmbed)
-        db.subtract(`money_${user.id}`, money)
+        db.subtract(`money_${user.id}`, amount)
     }
 
 }
