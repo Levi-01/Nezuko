@@ -1,54 +1,49 @@
-const Discord = require('discord.js')
-const db = require('quick.db')
-const ayarlar = require("../ayarlar.json")
-exports.run = async(client, message, args) => {
-  let prefix = ayarlar.prefix
-  if(!message.member.hasPermission("BAN_MEMBERS")) return;
-  if(!message.guild.members.cache.get(client.user.id).hasPermission("BAN_MEMBERS")) return;
-     let kişi = message.mentions.users.first()
-     let sebep = args.slice(1).join(" ")
-     if(!kişi) {
-       const ikrud = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`${prefix}unban User`)
-return message.channel.send(ikrud)
-     }
-     if(!sebep) sebep = `Sebep: Belirtilmemiş`
-     if(kişi.id === message.guild.ownerID) {
-       const pekabot = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`** You Can t Discard a Server Owner!**`)
-.then(x => x.delete({ timeout: 5000 }));
-return message.channel.send(pekabot)
-     }
-     if(kişi.id === client.user.id) {
-       const pekabot = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`** You re Going to Dump Me?**`)
-.then(x => x.delete({ timeout: 5000 }));
-return message.channel.send(pekabot)
-     }
-     if(kişi.id === message.author.id) {
-       const peka = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`** You Can t Throw Yourself Off the Server!**`)
-.then(x => x.delete({ timeout: 5000 }));
-return message.channel.send(peka)
-     }
-     message.guild.member(kişi).unban({ reason: `Reason: ${sebep} | By: ${message.author.tag}` })
- const ikrudka = new Discord.MessageEmbed()
-.setColor("#ffcb00")
-.setDescription(`**<@${kişi.id}> Named Member UnBanned From Server**`)
-return message.channel.send(ikrudka)
-   }
-exports.conf = {
-    enabled: true,
-    guildOnly: true,
-    aliases: ['unban',"unbanned"],
-    permLevel: 0
-};
-  exports.help = {
-    name: 'unban',      
-    description: 'Belirtilen Kişiyi Sunucudan Kickler',
-    usage: 'unban <kullanıcı>'
-};
+const Discord = require("discord.js");
+const db = require('quick.db');
+
+exports.run = async (bot, message, args) => {
+
+        if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("**You Dont Have The Permissions To Unban Someone! - [BAN_MEMBERS]**")
+
+        if (!args[0]) return message.channel.send("**Please Enter A Name!**")
+      
+        let bannedMemberInfo = await message.guild.fetchBans()
+
+        let bannedMember;
+        bannedMember = bannedMemberInfo.find(b => b.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || bannedMemberInfo.get(args[0]) || bannedMemberInfo.find(bm => bm.user.tag.toLowerCase() === args[0].toLocaleLowerCase());
+        if (!bannedMember) return message.channel.send("**Please Provide A Valid Username, Tag Or ID Or The User Is Not Banned!**")
+
+        let reason = args.slice(1).join(" ")
+
+        if (!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send("**I Don't Have Permissions To Unban Someone! - [BAN_MEMBERS]**")
+        try {
+            if (reason) {
+                message.guild.members.unban(bannedMember.user.id, reason)
+                var sembed = new Discord.MessageEmbed()
+                    .setColor("GREEN")
+                    .setAuthor(message.guild.name, message.guild.iconURL())
+                    .setDescription(`**${bannedMember.user.tag} has been unbanned for ${reason}**`)
+                message.channel.send(sembed)
+            } else {
+                message.guild.members.unban(bannedMember.user.id, reason)
+                var sembed2 = new Discord.MessageEmbed()
+                    .setColor("GREEN")
+                    .setAuthor(message.guild.name, message.guild.iconURL())
+                    .setDescription(`**${bannedMember.user.tag} has been unbanned**`)
+                message.channel.send(sembed2)
+            }
+        } catch {
+            
+        }
+
+        let channel = db.fetch(`modlog_${message.guild.id}`)
+        if (!channel) return;
+
+        let embed = new Discord.MessageEmbed()
+            .setColor("#ff0000")
+            .setThumbnail(bannedMember.user.displayAvatarURL({ dynamic: true }))
+            .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL())
+            .addField("**Moderation**", "unban")
+            .addField("**Unbanned**", `${bannedMember.user.username}`)
+            .addField("**ID**", `${bannedMember.user.id}`)
+            .addField("**Moderator**", message.author.username)
