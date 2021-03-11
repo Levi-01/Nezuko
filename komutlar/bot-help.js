@@ -15,7 +15,7 @@ const embed = new Discord.MessageEmbed()
 .setDescription(`
 > __Global Commands__\`✨\`
 avatar / info /
-ping / gifs / moderation
+ping / gifs / 
 > __Vip Commands__\`🔥\`
 gifs / moderation / funny / games
 `)
