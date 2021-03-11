@@ -1,4 +1,4 @@
-const slotItems = ["🍇", "🍉", "🍌", "🍎", "🍒"];
+const slotItems = ["❤️", "🍑", "🍆", "🍎", "🍋"];
 const db = require("quick.db");
 const Discord = require('discord.js');  
 
