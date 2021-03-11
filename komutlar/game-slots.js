@@ -5,7 +5,7 @@ const Discord = require('discord.js');
 exports.run = async (bot, message, args) => {
 
     let user = message.author;
-    let balance = await db.fetch(`amount_${user.id}`)
+    let balance = db.get(`account.${message.author.id}.balance`);
     let amount = parseInt(args[0]);
     let win = false;
 
@@ -35,13 +35,13 @@ exports.run = async (bot, message, args) => {
             .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\nYou won ${amount} coins`)
             .setColor("GREEN")
         message.channel.send(slotsEmbed1)
-        db.add(`money_${user.id}`, amount)
+        db.add(`${message.author.id}`, amount)
     } else {
         let slotsEmbed = new Discord.MessageEmbed()
             .setDescription(`${slotItems[number[0]]} | ${slotItems[number[1]]} | ${slotItems[number[2]]}\n\nYou lost ${amount} coins`)
             .setColor("RED")
         message.channel.send(slotsEmbed)
-        db.subtract(`money_${user.id}`, amount)
+        db.subtract(`${message.author.id}`, amount)
     }
 
 }
