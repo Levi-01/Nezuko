@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const db = require('quick.db');
+const sql = require("sqlite");
 
 exports.run = (client, message, args) => {
   sql.get(`SELECT * FROM scores WHERE guildId ="${message.guild.id}"`).then(row => {
