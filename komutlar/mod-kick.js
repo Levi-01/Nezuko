@@ -1,54 +1,76 @@
-const Discord = require('discord.js')
-const db = require('quick.db')
-const ayarlar = require("../ayarlar.json")
-exports.run = async(client, message, args) => {
-  let prefix = ayarlar.prefix
-  if(!message.member.hasPermission("KICK_MEMBERS")) return;
-  if(!message.guild.members.cache.get(client.user.id).hasPermission("KICK_MEMBERS")) return;
-     let kişi = message.mentions.users.first()
-     let sebep = args.slice(1).join(" ")
-     if(!kişi) {
-       const ikrud = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`${prefix}kick User`)
-return message.channel.send(ikrud)
-     }
-     if(!sebep) sebep = `Sebep: Belirtilmemiş`
-     if(kişi.id === message.guild.ownerID) {
-       const pekabot = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`** You Can t Discard a Server Owner!**`)
-.then(x => x.delete({ timeout: 5000 }));
-return message.channel.send(pekabot)
-     }
-     if(kişi.id === client.user.id) {
-       const pekabot = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`** You re Going to Dump Me?**`)
-.then(x => x.delete({ timeout: 5000 }));
-return message.channel.send(pekabot)
-     }
-     if(kişi.id === message.author.id) {
-       const peka = new Discord.MessageEmbed()
-.setColor("#ff0000")
-.setDescription(`** You Can t Throw Yourself Off the Server!**`)
-.then(x => x.delete({ timeout: 5000 }));
-return message.channel.send(peka)
-     }
-     message.guild.member(kişi).kick({ reason: `Reason: ${sebep} | By: ${message.author.tag}` })
- const ikrudka = new Discord.MessageEmbed()
-.setColor("#ffcb00")
-.setDescription(`**<@${kişi.id}> Named Member Kicked From Server**`)
-return message.channel.send(ikrudka)
-   }
+const Discord = require ('discord.js');
+const db = require ('quick.db');
+
+exports.run =  async (bot, message, args) => {
+        try {
+            if (!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send("**You Do Not Have Permissions To Kick Members! - [KICK_MEMBERS]**");
+            if (!message.guild.me.hasPermission("KICK_MEMBERS")) return message.channel.send("**I Do Not Have Permissions To Kick Members! - [KICK_MEMBERS]**");
+
+            if (!args[0]) return message.channel.send('**Enter A User To Kick!**')
+
+            var kickMember = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase());
+            if (!kickMember) return message.channel.send("**User Is Not In The Guild!**");
+
+            if (kickMember.id === message.member.id) return message.channel.send("**You Cannot Kick Yourself!**")
+
+            if (!kickMember.kickable) return message.channel.send("**Cannot Kick This User!**")
+            if (kickMember.user.bot) return message.channel.send("**Cannot Kick A Bot!**")
+
+            var reason = args.slice(1).join(" ");
+            try {
+                const sembed2 = new Discord.MessageEmbed()
+                    .setColor("RED")
+                    .setDescription(`**Hello, You Have Been Kicked From ${message.guild.name} for - ${reason || "No Reason!"}**`)
+                    .setFooter(message.guild.name, message.guild.iconURL())
+                kickMember.send(sembed2).then(() =>
+                    kickMember.kick()).catch(() => null)
+            } catch {
+                kickMember.kick()
+            }
+            if (reason) {
+            var sembed = new Discord.MessageEmbed()
+                .setColor("GREEN")
+                .setAuthor(message.guild.name, message.guild.iconURL())
+                .setDescription(`**${kickMember.user.username}** has been kicked for ${reason}`)
+            message.channel.send(sembed);
+            } else {
+                var sembed2 = new Discord.MessageEmbed()
+                .setColor("GREEN")
+                .setAuthor(message.guild.name, message.guild.iconURL())
+                .setDescription(`**${kickMember.user.username}** has been kicked`)
+            message.channel.send(sembed2);
+            }
+            let channel = db.fetch(`modlog_${message.guild.id}`)
+            if (!channel) return;
+
+            const embed = new Discord.MessageEmbed()
+                .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL())
+                .setColor("#ff0000")
+                .setThumbnail(kickMember.user.displayAvatarURL({ dynamic: true }))
+                .setFooter(message.guild.name, message.guild.iconURL())
+                .addField("**Moderation**", "kick")
+                .addField("**User Kicked**", kickMember.user.username)
+                .addField("**Kicked By**", message.author.username)
+                .addField("**Reason**", `${reason || "**No Reason**"}`)
+                .addField("**Date**", message.createdAt.toLocaleString())
+                .setTimestamp();
+            var sChannel = message.guild.channels.cache.get(channel)
+            if (!sChannel) return;
+            sChannel.send(embed)
+        } catch (e) {
+            return message.channel.send(`**${e.message}**`)
+        }
+    }
+
 exports.conf = {
-    enabled: true,
-    guildOnly: true,
-    aliases: ['kickle',"at"],
-    permLevel: 0
+  enabled: true,
+  guildOnly: false,
+  aliases: ["kick"],
+  permLevel: 0
 };
-  exports.help = {
-    name: 'kick',      
-    description: 'Belirtilen Kişiyi Sunucudan Kickler',
-    usage: 'kick <kullanıcı>'
+
+exports.help = {
+  name: "kick",
+  description: "kicked",
+  usage: "[name | nickname | mention | ID] <reason> (optional)"
 };
