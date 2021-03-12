@@ -1,33 +1,69 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const db = require('quick.db');
 
-exports.run = async (client, message, args) => {
-  
- if(!args[0])return message.channel.send(`**Please Enter A Name!** `)
-        let User = message.mentions.users.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(args[0])
-        if(!User)return message.channel.send(`This is not a user on the server! Please specify a valid user..`)
-        let sebep = args.slice(1).join(" ")
-        if(!sebep) return message.channel.send(`Please give me a reason! You can't throw someone away for no reason, can you? `)
-        if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send(`**I Dont Have The Permissions To Ban Users! - [BAN_MEMBERS]**`);
-        message.guild.members.ban(User, { reason: sebep });
-        const Embed = new Discord.MessageEmbed()
-        .setTitle(`You Fired a User!`)
-        .setDescription(`${client.users.cache.get(User.id).username} kovuldu!`)
-        .setColor(`RANDOM`)
-        message.channel.send(Embed)
-        
+exports.run = async (bot, message, args) => {
+
+        if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("**You Dont Have The Permissions To ban Someone! - [BAN_MEMBERS]**")
+
+        if (!args[0]) return message.channel.send("**Please Enter A Name!**")
+      
+        let bannedMemberInfo = await message.guild.fetchBans()
+
+        let bannedMember;
+        bannedMember = bannedMemberInfo.find(b => b.user.username.toLowerCase() === args[0].toLocaleLowerCase()) || bannedMemberInfo.get(args[0]) || bannedMemberInfo.find(bm => bm.user.tag.toLowerCase() === args[0].toLocaleLowerCase());
+        if (!bannedMember) return message.channel.send("**Please Provide A Valid Username, Tag Or ID Or The User Is Not Banned!**")
+
+        let reason = args.slice(1).join(" ")
+
+        if (!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send("**I Don't Have Permissions To Unban Someone! - [BAN_MEMBERS]**")
+        try {
+            if (reason) {
+                message.guild.members.ban(bannedMember.user.id, reason)
+                var sembed = new Discord.MessageEmbed()
+                    .setColor("GREEN")
+                    .setAuthor(message.guild.name, message.guild.iconURL())
+                    .setDescription(`**${bannedMember.user.tag} has been banned for ${reason}**`)
+                message.channel.send(sembed)
+            } else {
+                message.guild.members.ban(bannedMember.user.id, reason)
+                var sembed2 = new Discord.MessageEmbed()
+                    .setColor("GREEN")
+                    .setAuthor(message.guild.name, message.guild.iconURL())
+                    .setDescription(`**${bannedMember.user.tag} has been banned**`)
+                message.channel.send(sembed2)
+            }
+        } catch {
+            
+        }
+ let channel = db.fetch(`modlog_${message.guild.id}`)
+        if (!channel) return;
+
+        let embed = new Discord.MessageEmbed()
+            .setColor("#ff0000")
+            .setThumbnail(bannedMember.user.displayAvatarURL({ dynamic: true }))
+            .setAuthor(`${message.guild.name} Modlogs`, message.guild.iconURL())
+            .addField("**Moderation**", "ban")
+            .addField("**Unbanned**", `${bannedMember.user.username}`)
+            .addField("**ID**", `${bannedMember.user.id}`)
+            .addField("**Moderator**", message.author.username)
+            .addField("**Reason**", `${reason}` || "**No Reason**")
+            .addField("**Date**", message.createdAt.toLocaleString())
+            .setFooter(message.guild.name, message.guild.iconURL())
+            .setTimestamp();
+
+        var sChannel = message.guild.channels.cache.get(channel)
+        if (!sChannel) return;
+        sChannel.send(embed)
     }
-
-
 exports.conf = {
-    enabled:false,
-    guildOnly: false,
-    aliases: [],
-    permLevel: 3,
-}
+  enabled: true,
+  guildOnly: false,
+  aliases: ["ban"],
+  permLevel: 0
+};
 
 exports.help = {
-    name: 'ban',
-    description: 'ban komutu',
-    usage: 'ban'
-}
+  name: "ban",
+  description: "banned",
+  usage: "ban"
+};
