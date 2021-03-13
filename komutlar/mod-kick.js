@@ -34,13 +34,13 @@ let dızcılaraselam = message.mentions.users.first();
 
 if (message.mentions.users.size < 1) return message.channel.send(`**Please Enter A Name!**`).catch(console.error);
 
-if (!message.guild.member(dızcılaraselam).bannable) return message.channel.send(`Belirttiğiniz kişinin Yetkisi Benden Daha Üstün!`);
+if (!message.guild.member(dızcılaraselam).bannable) return message.channel.send(`**Cant Kick That User**!`);
 
   
 
 message.guild.member(dızcılaraselam).kick();
 
-message.channel.send(" Başarılı, "+ dızcılaraselam +" İD'li kullanıcı **" + reason + "** sebebiyle sunucudan atıldı.")
+message.channel.send("**Please Provide A Valid Username, Tag Or ID Or The User Is Not Kick!**")
 
      
 
