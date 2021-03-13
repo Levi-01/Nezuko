@@ -1,53 +1,71 @@
 const Discord = require('discord.js');
 
-exports.run =  async (client, message, args) => {
+const fs = require('fs');
 
-        if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send('You can\'t use that!')
-        if(!message.guild.me.hasPermission("BAN_MEMBERS")) return message.channel.send('I don\'t have the right permissions.')
+exports.run = (client, message, args) => {
 
-        const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+  
 
-        if(!args[0]) return message.channel.send('Please specify a user');
+if (!message.guild) {
 
-        if(!member) return message.channel.send('Can\'t seem to find this user. Sorry \'bout that :/');
-        if(!member.bannable) return message.channel.send('This user can\'t be banned. It is either because they are a mod/admin, or their highest role is higher than mine');
+  
 
-        if(member.id === message.author.id) return message.channel.send('Bruh, you can\'t ban yourself!');
+const ozelmesajuyari = new Discord.MessageEmbed()
 
-        let reason = args.slice(1).join(" ");
+.setTitle('Warning')
 
-        if(!reason) reason = 'Unspecified';
+.setColor('RED')
 
-        member.ban(`${reason}`).catch(err => { 
-          message.channel.send('Something went wrong')
-            console.log(err)
-        })
+.setAuthor(message.author.username, message.author.avatarURL())
 
-        const banembed = new Discord.MessageEmbed()
-        .setTitle('Member Banned')
-        .setThumbnail(member.user.displayAvatarURL())
-        .addField('User Banned', member)
-        .addField('Kicked by', message.author)
-        .addField('Reason', reason)
-        .setFooter('Time kicked', client.user.displayAvatarURL())
-        .setTimestamp()
+.setDescription('Please use this commune on the server I'm attached to instead of using it privately.')
 
-        message.channel.send(banembed);
+return message.author.send(ozelmesajuyari);
 
+}
 
-    }
+  
+
+let guild = message.guild
+
+let reason = args.slice(1).join(' ');
+
+let dızcılaraselam = message.mentions.users.first();
+
+if (message.mentions.users.size < 1) return message.channel.send(`**Please Enter A Name!**`).catch(console.error);
+
+if (!message.guild.member(dızcılaraselam).bannable) return message.channel.send(`**Cant ban That User**!`);
+
+  
+
+message.guild.member(dızcılaraselam).ban();
+
+message.channel.send("**Please Provide A Valid Username, Tag Or ID Or The User Is Not ban!**")
+
+     
+
+};
 
 exports.conf = {
-    enabled: true,
-    guildOnly: false,
-    aliases: ['ban', 'b'],
-    permLevel: 0
-  };
-  
+
+  enabled: true,
+
+  guildOnly: true,
+
+  aliases: ['banned'],
+
+  permLevel: 3
+
+};
+
 exports.help = {
-    name: 'ban',
-    description: 'Ban a member',
-    usage: 'nb/ban @User#1234 {reason}',
-    permissions: 'Administrator',
-    group: 'Admin Module'
-  };
+
+  name: 'ban',
+
+  description: 'İstediğiniz kişiyi sunucudan atar.',
+
+  usage: 'ban <@kullanıcı> <sebep>',
+
+ 
+
+};
