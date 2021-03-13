@@ -32,7 +32,7 @@ let reason = args.slice(1).join(' ');
 
 let dızcılaraselam = message.mentions.users.first();
 
-if (message.mentions.users.size < 1) return message.channel.send(`Lütfen sunucudan atacağınız kişiyi etiketleyin.`).catch(console.error);
+if (message.mentions.users.size < 1) return message.channel.send(`**Please Enter A Name!**`).catch(console.error);
 
 if (!message.guild.member(dızcılaraselam).bannable) return message.channel.send(`Belirttiğiniz kişinin Yetkisi Benden Daha Üstün!`);
 
