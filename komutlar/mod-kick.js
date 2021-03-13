@@ -12,13 +12,13 @@ if (!message.guild) {
 
 const ozelmesajuyari = new Discord.MessageEmbed()
 
-.setTitle('UYARI')
+.setTitle('Warning')
 
 .setColor('RED')
 
-.setAuthor(message.author.username, message.author.avatarURL)
+.setAuthor(message.author.username, message.author.avatarURL())
 
-.setDescription('Lütfen bu komudu özelde kullanmak yerine ekli olduğum sunucuda kullan.')
+.setDescription('Please use this commune on the server I m attached to instead of using it privately.')
 
 return message.author.send(ozelmesajuyari);
 
