@@ -9,8 +9,8 @@ exports.run = async(client, msg, args) => {
         guild.emojis.cache.forEach((e) => {
             e.animated ? animEmotes.push(`<a:${e.name}:${e.id}>`) : staticEmotes.push(`<:${e.name}:${e.id}>`);
         });
-        staticEmotes = staticEmotes.length !== 0 ? `__**[${staticEmotes.length}] Normal Emoji**__\n${staticEmotes.join('')}` : '\n**Normal Emojis**';
-        animEmotes = animEmotes.length !== 0 ? `\n\n__**[${animEmotes.length}] Hareketli Emoji**__\n${animEmotes.join('')}` : '\n**Moving Emojis**';
+        staticEmotes = staticEmotes.length !== 0 ? `__**[${staticEmotes.length}] Normal Emojis**__\n${staticEmotes.join('')}` : '\n**Normal Emojis**';
+        animEmotes = animEmotes.length !== 0 ? `\n\n__**[${animEmotes.length}] Moving Emojis**__\n${animEmotes.join('')}` : '\n**Moving Emojis**';
         try {     
   let botembed = new Discord.MessageEmbed()
             .setColor(`RANDOM`)
