@@ -30,7 +30,7 @@ let guild = message.guild
 
 let reason = args.slice(1).join(' ');
 
-let dızcılaraselam = message.guild.users.first();
+let dızcılaraselam = message.mention.users.first();
 
 if (message.mentions.users.size < 1) return message.channel.send(`**Please Enter A Name!**`).catch(console.error);
 
