@@ -17,9 +17,9 @@ exports.run = function (client, message, args) {
 
       if(!sebep) return message.reply("**Please Provide A Valid Username, Tag Or ID Or The User Is Not Kick!**")
 
-      if(Undefined.id === message.author.id) return message.reply("Kendini Kickleyemezsin.")
+      if(Undefined.id === message.author.id) return message.reply("**You Cannot Kick Yourself**")
 
-      if(!message.guild.member(Undefined).kickable) return message.reply("Bu Kişiyi Kickleyemezsin!")
+      if(!message.guild.member(Undefined).kickable) return message.reply("**Cant Kick That User**")
 
         
         message.guild.member(Undefined).kick(sebep)
