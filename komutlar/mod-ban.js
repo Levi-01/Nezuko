@@ -18,7 +18,7 @@ const ozelmesajuyari = new Discord.MessageEmbed()
 
 .setAuthor(message.author.username, message.author.avatarURL())
 
-.setDescription('Please use this commune on the server I'm attached to instead of using it privately.')
+.setDescription('Please use this commune on the server I m attached to instead of using it privately.')
 
 return message.author.send(ozelmesajuyari);
 
