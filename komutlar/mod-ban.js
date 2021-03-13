@@ -1,26 +1,3 @@
-exports.run = (client, message, args, Discord, sql) => {
-  var react = require("../eos.js")
-  var guild = message.guild
-  //The targeted channel (aka mod log channel)
-  //the user to be banned
-  var banneduser = message.mentions.users.first()
-  if(banneduser.id == client.user.id){
-    return message.channel.send("Try banning me again you fuckwit.")
-  }
-  //saves the ban perms in a compact variable
-  let banPerms = message.channel.guild.member(client.user.id).hasPermission("BAN_MEMBERS")
-  var reason = args.slice(1).join(" ");
-  if(!reason){
-    reason = "No Reason";
-  }
-
-  if(!guild.members.get(message.author.id).hasPermission("BAN_MEMBERS")){return react.noPermReact()};
-
-  //if the bot doesn't have the permissions
-  if(!banPerms){return react.noPermReact()
-  }else{
-      //if the user is bannable
-      if (message.mentions.users.first().bannable = true){
         //send the confirmation message, add a react and ban the user
         if (args.length >= 2){
         message.guild.member(banneduser).ban()
@@ -50,3 +27,16 @@ exports.run = (client, message, args, Discord, sql) => {
     }
   }
 }
+
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: ["ban"],
+  permLevel: 0
+};
+
+exports.help = {
+  name: "ban",
+  description: "baned",
+  usage: "[name | nickname | mention | ID] <reason> (optional)"
+};
