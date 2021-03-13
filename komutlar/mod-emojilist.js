@@ -31,7 +31,7 @@ exports.run = async(client, msg, args) => {
 }
 //GNARGE BOT ALTYAPISIN'DAN BU DOSYAYA AKTARILMIŞTIR!
 exports.conf = {
- aliases: ['emoji-liste','eomjilist'],
+ aliases: ['emoji-liste','emojilist'],
  permLevel: 0,
  kategori: 'Sunucu'
 };
