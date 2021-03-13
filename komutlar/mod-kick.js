@@ -1,65 +1,71 @@
-const Discord = require("discord.js");
-const ayarlar = require("../ayarlar.json");
-const db = require("quick.db");
+const Discord = require('discord.js');
 
-exports.run = function (client, message, args) {
+const fs = require('fs');
 
-    if (!message.member.hasPermission("KICK_MEMBERS"))
-      return message.reply(`Bu yetkiyi kullanabilmek için **Kullanıcıları At** yetkisine sahip olmak zorundasın.`);
+exports.run = (client, message, args) => {
 
-      //-----------------------KOD-BAŞLANGIÇ-----------------------\\
+  
 
-      let Undefined = message.mentions.users.first() || message.guild.members.cache.get(args[0]);  // undefined
-      let sebep = args.slice(1).join(' ');
-      let kickkanal = ayarlar.kicklog;
+if (!message.guild) {
 
-      if(!Undefined) return message.reply("**Please Enter A Name!**")  // undefined
+  
 
-      if(!sebep) return message.reply("**Please Provide A Valid Username, Tag Or ID Or The User Is Not Kick!**")
+const ozelmesajuyari = new Discord.MessageEmbed()
 
-      if(Undefined.id === message.author.id) return message.reply("**You Cannot Kick Yourself**")
+.setTitle('UYARI')
 
-      if(!message.guild.member(Undefined).kickable) return message.reply("**Cant Kick That User**")
+.setColor('RED')
 
-        
-        message.guild.member(Undefined).kick(sebep)
+.setAuthor(message.author.username, message.author.avatarURL)
 
-.then(() => {
-          setTimeout(function() {
-    
-          message.delete()
-          },5000);
-        })
-            
-          
-         const kicklendi = new Discord.MessageEmbed()
-         .setAuthor(message.author.tag, message.author.avatarURL())
-         .setTitle("Sunucudan Bir Kullanıcı Kicklendi!")
-         .setColor("0x348f36")
-         .setDescription(`
-           
-              Kickleyen Yetkili » ${message.author} (\`${message.author.id}\`)
-              Kicklenen Kullanıcı » ${Undefined} (\`${Undefined.id}\`)
-              Sebep » \`${sebep}\`
+.setDescription('Lütfen bu komudu özelde kullanmak yerine ekli olduğum sunucuda kullan.')
 
-            `)
-         .setFooter("undefined ❤️ Copé")
-         .setTimestamp()
-         
-         client.channels.cache
-         .get(kickkanal)
-         .send(kicklendi)
-         
-  }
+return message.author.send(ozelmesajuyari);
+
+}
+
+  
+
+let guild = message.guild
+
+let reason = args.slice(1).join(' ');
+
+let dızcılaraselam = message.mentions.users.first();
+
+if (message.mentions.users.size < 1) return message.channel.send(`Lütfen sunucudan atacağınız kişiyi etiketleyin.`).catch(console.error);
+
+if (!message.guild.member(dızcılaraselam).bannable) return message.channel.send(`Belirttiğiniz kişinin Yetkisi Benden Daha Üstün!`);
+
+  
+
+message.guild.member(dızcılaraselam).kick();
+
+message.channel.send(" Başarılı, "+ dızcılaraselam +" İD'li kullanıcı **" + reason + "** sebebiyle sunucudan atıldı.")
+
+     
+
+};
 
 exports.conf = {
+
   enabled: true,
-  aliases: ['kick'],
-  guildOnly: false,
-  permLevel: 0
+
+  guildOnly: true,
+
+  aliases: ['at'],
+
+  permLevel: 3
+
 };
 
 exports.help = {
+
   name: 'kick',
-  usage: 'kick'
+
+  description: 'İstediğiniz kişiyi sunucudan atar.',
+
+  usage: 'kick <@kullanıcı> <sebep>',
+
+ 
+
 };
