@@ -15,7 +15,7 @@ exports.run = function (client, message, args) {
 
       if(!Undefined) return message.reply("**Please Enter A Name!**")  // undefined
 
-      if(!sebep) return message.reply("Kickleme Sebebini Belirtirmisin.")
+      if(!sebep) return message.reply("**Please Provide A Valid Username, Tag Or ID Or The User Is Not Kick!**")
 
       if(Undefined.id === message.author.id) return message.reply("Kendini Kickleyemezsin.")
 
