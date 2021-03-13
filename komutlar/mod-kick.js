@@ -13,7 +13,7 @@ exports.run = function (client, message, args) {
       let sebep = args.slice(1).join(' ');
       let kickkanal = ayarlar.kicklog;
 
-      if(!Undefined) return message.reply("Kickleyeceğin Kişiyi Belirtirmisin.")  // undefined
+      if(!Undefined) return message.reply("**Please Enter A Name!**")  // undefined
 
       if(!sebep) return message.reply("Kickleme Sebebini Belirtirmisin.")
 
