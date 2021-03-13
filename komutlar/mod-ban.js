@@ -40,7 +40,7 @@ if (!message.guild.member(dızcılaraselam).bannable) return message.channel.sen
 
 message.guild.member(dızcılaraselam).ban();
 
-message.channel.send("**Please Provide A Valid Username, Tag Or ID Or The User Is Not ban!**")
+message.channel.send(`${dızcılaraselam} Banned from the server!**`)
 
      
 
