@@ -40,7 +40,7 @@ if (!message.guild.member(dızcılaraselam).bannable) return message.channel.sen
 
 message.guild.member(dızcılaraselam).kick();
 
-message.channel.send("**Please Provide A Valid Username, Tag Or ID Or The User Is Not Kick!**")
+message.channel.send("**${dızcılaraselam} Kicked from the server!**")
 
      
 
