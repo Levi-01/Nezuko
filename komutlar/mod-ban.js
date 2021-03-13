@@ -1,55 +1,26 @@
-exports.run = (client, message, args, Discord, sql) => {
-  var react = require("../eos.js")
-  var guild = message.guild
-  //The targeted channel (aka mod log channel)
-  //the user to be banned
-  var banneduser = message.mentions.users.first()
-  if(banneduser.id == client.user.id){
-    return message.channel.send("Try banning me again you fuckwit.")
-  }
-  //saves the ban perms in a compact variable
-  let banPerms = message.channel.guild.member(client.user.id).hasPermission("BAN_MEMBERS")
-  var reason = args.slice(1).join(" ");
-  if(!reason){
-    reason = "No Reason";
-  }
+const Discord = require("discord.js");
 
-  if(!guild.members.get(message.author.id).hasPermission("BAN_MEMBERS")){return react.noPermReact()};
+exports.run = async (bot, message, args) => {
+    let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!bUser) return message.channel.send("Can't find user!");
+    let bReason = args.join(" ").slice(22);
+    if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.channel.send("No can do pal!");
+    if(bUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("That person can't be banned!");
 
-  //if the bot doesn't have the permissions
-  if(!banPerms){return react.noPermReact()
-  }else{
-      //if the user is bannable
-      if (message.mentions.users.first().bannable = true){
-        
-        //send the confirmation message, add a react and ban the user
-        if (args.length >= 2){
-        message.guild.member(banneduser).ban()
-        .then(message.channel.send("Shade \`Success`\ - User banned successfully.")
-        .then(message=>message.react('✅')));
-        //builds the embed for the log channelOh
-        const embed = new Discord.RichEmbed()
-          .setColor(message.guild.member(client.user).highestRole.color)
-          .setTimestamp(message.createdAt)
-          .addField("User Banned: ", banneduser, true)
-          .addField("Banned By: ", message.author.username, true)
-          .addField("Reason: ", reason, true)
-          .setFooter("Automated Mod Logging");
-          //sends the embed
+    let banEmbed = new Discord.RichEmbed()
+    .setDescription("~Ban~")
+    .setColor("#bc0000")
+    .addField("Banned User", `${bUser} with ID ${bUser.id}`)
+    .addField("Banned By", `<@${message.author.id}> with ID ${message.author.id}`)
+    .addField("Banned In", message.channel)
+    .addField("Time", message.createdAt)
+    .addField("Reason", bReason);
 
-          const config = require ("../config.json")
-          const logchannel = message.guild.channels.get(config[guild.id].modlogchannelID)
-          if(!logchannel || logchannel === "null"){
-            logchannel = message.guild.channels.get(config[guild.id].logchannelID)
-          }
-          logchannel.send(`**Infraction for: **${message.mentions.users.first()}`, {embed}).catch(console.log)
+    let incidentchannel = message.guild.channels.find(`name`, "kicked-banned");
+    if(!incidentchannel) return message.channel.send("Can't find kicked-banned channel.");
 
-        }else{
-          message.reply("Shade \`Error`\ - You must add a reason!")
-          .then(message=>message.react('❎'));
-      }
-    }
-  }
+    message.guild.member(bUser).ban(bReason);
+    incidentchannel.send(banEmbed);
 }
 
 exports.conf = {
