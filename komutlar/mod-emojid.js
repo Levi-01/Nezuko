@@ -1,7 +1,6 @@
+
 const Discord = require('discord.js');
-const ayarlar = require('./ayarlar.json');
 const { parse } = require("twemoji-parser");
-const { MessageEmbed } = require("discord.js");
 
 exports.run = async (client, message, args) => {
 
@@ -27,7 +26,7 @@ exports.run = async (client, message, args) => {
                 }`;
             const name = args.slice(1).join(" ");
             try {
-                const Added = new MessageEmbed()
+                const Added = new Discord.MessageEmbed()
                 .setColor('RED')
                 .setTitle(`${client.emotes.verified} Emoji Added`)
                 .setDescription(
