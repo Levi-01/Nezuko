@@ -11,7 +11,7 @@ exports.run = async (client, message, args) => {
         if(emoji.id == null) return message.channel.send("Please enter a valid emoji.");
 
         const embedEmoji = new Discord.MessageEmbed()
-        .setAuthor(`$(emoji.id)`)
+        .setAuthor(`${emoji.id}`)
         .setImage(`https://cdn.discordapp.com/emojis/${emoji.id}.${(emoji.animated ? 'gif': 'png')}`)
         .setColor('RANDOM')
         
