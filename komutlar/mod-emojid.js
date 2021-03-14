@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const Discord = require('discord.js');
 const { parse } = require("twemoji-parser");
-
+const ayarlar = require('../ayarlar.json');
 
 exports.run = async (client, message, args) => {
 
