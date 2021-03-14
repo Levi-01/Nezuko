@@ -27,7 +27,7 @@ exports.run = async (client, message, args) => {
                 }`;
             const name = args.slice(1).join(" ");
             try {
-                const Added = new Discord.MessageEmbed()
+                const Added = new MessageEmbed()
                 .setColor('RED')
                 .setTitle(`${client.emotes.verified} Emoji Added`)
                 .setDescription(
