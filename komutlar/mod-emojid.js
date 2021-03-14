@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const config = require('../../configs/config.json');
+const config = require('../../ayarlars/ayarlar.json');
 const { parse } = require("twemoji-parser");
 const { MessageEmbed } = require("discord.js");
 
