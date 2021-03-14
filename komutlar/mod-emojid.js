@@ -49,7 +49,7 @@ exports.run = async (client, message, args) => {
                 return message.channel.send(`${client.emotes.error} **Please Give Me A Valid Emoji!**`);
             message.channel.send(
                 `${client.emotes.error} **You Can Use Normal Emoji Without Adding In Server!**`
- );
+            );
         }
 
     }
