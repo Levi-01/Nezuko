@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
         .setDescription(`\`${emoji.name}\` \`${emoji.id}\``)
         .setImage(`https://cdn.discordapp.com/emojis/${emoji.id}.${(emoji.animated ? 'gif': 'png')}`)
         .setColor('RANDOM')
-        .setFooter("text": "page "+(loc+1)+"/"+(emojis.length)
+        .setFooter(emojis.length)
         message.channel.send(embedEmoji)
 
         } catch(e) {
