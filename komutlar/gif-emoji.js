@@ -24,7 +24,7 @@ exports.conf = {
 
   guildOnly: false,
 
-  aliases: ['emoji','Emojis','emojis','Emoji'],
+  aliases: ['Emojis','emojis'],
 
   permLevel: 0
 
