@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-exports.run = async(client, msg, args) => {
+exports.run = async(client, message , args) => {
 
         if (!message.member.permissions.has("MANAGE_EMOJIS")) return message.channel.send("You don't have MANAGE_EMOJIS permission!");
         if (!message.guild.me.permissions.has("MANAGE_EMOJIS")) return message.channel.send("I need MANAGE_EMOJIS permission!");
@@ -14,7 +14,7 @@ exports.run = async(client, msg, args) => {
             if (parsedEmoji.id) {
                 try {
                     const extension = parsedEmoji.animated ? '.gif' : '.png';
-                    const url = `https://cdn.discordapp.com/emojis/${parsedEmoji.id + extension};`
+                    const url = [`https://cdn.discordapp.com/emojis/${parsedEmoji.id + extension}`];
                     message.guild.emojis.create(url, parsedEmoji.name).catch((e) => {
                         message.channel.send(`<:HBminus:783351288515657728> | ${e}`);
                         return;
@@ -28,13 +28,13 @@ exports.run = async(client, msg, args) => {
 
     }
 exports.conf = {
-    enabled: false,
-    guildOnly: false,
-    aliases: ['addemoji','addemojis'],
-    permLevel: 0
-  };
-  
-  exports.help = {
-    name: 'addemoji'
-    
-  };
+ aliases: ['addemoji','addemojis'],
+ permLevel: 0,
+ kategori: 'Sunucu'
+};
+
+exports.help = {
+ name: 'addemoji',
+ description: '',
+ usage: 'addemoji'
+};
