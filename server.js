@@ -105,7 +105,7 @@ client.elevation = message => {
 client.on('message', function(message) {
 let args = message.content.split(" ").slice('').join(" ");
 if(message.author.bot)return;
-const sugch = message.channel.id === "816792193359806523"
+const sugch = message.channel.id === "828306775433281546"
 if (!sugch) return false;
 if(message.content.startsWith('')){
   message.delete()
