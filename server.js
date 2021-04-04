@@ -118,8 +118,8 @@ const embed = new Discord.MessageEmbed()
 .setFooter(`Suggestion by | ${message.author.id}`)
 .setTimestamp()
 message.channel.send(embed).then(msg => {
-  msg.react('👍').then( r => {
-    msg.react('👎')
+  msg.react('812100042667196416').then( r => {
+    msg.react('812099853974503495')
   })
 })
 }
