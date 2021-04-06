@@ -144,13 +144,16 @@ client.yetkiler = message => {
 
 client.on("guildCreate", guild => {
   client.channels.cache.get("828804920987090986")
-    .send(`join server |🔺
+  message.send(new Discord.MessageEmbed()
+.setColor('GREEN')
+.setDescription(`join server |🔺
 Server name: ${guild.name}
 Server owner: ${guild.owner}
 Server id: ${guild.id}
 Server Count: ${guild.memberCount}
-`);
-});
+`);  
+});message.react("✅")
+
 client.on("guildDelete", guild => {
   client.channels.cache.get("828805021441196102")
     .send(`Left Server| 🔻
