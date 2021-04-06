@@ -140,4 +140,23 @@ client.yetkiler = message => {
   return permlvl;
 };
 
+//log
+
+client.on("guildCreate", guild => {
+  client.channels.cache.get("828804920987090986")
+    .send(`join server |🔺
+Server name: ${guild.name}
+Server owner: ${guild.owner}
+Server id: ${guild.id}
+Server Count: ${guild.memberCount}
+`);
+});
+client.on("guildDelete", guild => {
+  client.channels.cache.get("828805021441196102")
+    .send(`Left Server| 🔻
+Server name: ${guild.name}
+Server id: ${guild.id}
+Server Count: ${guild.memberCount}`);
+});
+
 client.login(ayarlar.token)
