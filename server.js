@@ -152,7 +152,7 @@ Server owner: ${guild.owner}
 Server id: ${guild.id}
 Server Count: ${guild.memberCount}
 `);  
-});message.react("✅")
+});message.react("✅");
 
 client.on("guildDelete", guild => {
   client.channels.cache.get("828805021441196102")
