@@ -144,9 +144,7 @@ client.yetkiler = message => {
 
 client.on("guildCreate", guild => {
   client.channels.cache.get("828804920987090986")
-  message.send(new Discord.MessageEmbed()
-.setColor('GREEN')
-.setDescription(`join server |🔺
+.send(`join server |🔺
 Server name: ${guild.name}
 Server owner: ${guild.owner}
 Server id: ${guild.id}
