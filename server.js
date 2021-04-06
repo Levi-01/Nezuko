@@ -144,6 +144,7 @@ client.yetkiler = message => {
 
 client.on("guildCreate", guild => {
   client.channels.cache.get("828804920987090986")
+.react("✅")
 .send(`join server |🔺
 Server name: ${guild.name}
 Server owner: ${guild.owner}
