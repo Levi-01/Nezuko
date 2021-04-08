@@ -13,8 +13,8 @@ const embed = new Discord.MessageEmbed()
 .setThumbnail(client.user.avatarURL())
 .setTimestamp()
 .setDescription(`
-> __Global Commands__\`✨\`
-avatar / info /
+\`✨\`__Global Commands__
+avatar / info / invite /
 ping / gifs / showemoji
 > __Vip Commands__\`🔥\` / moderation / funny / games
 `)
