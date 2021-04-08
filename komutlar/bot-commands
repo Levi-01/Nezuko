@@ -1,0 +1,37 @@
+const { MessageEmbed } = require("discord.js");
+
+exports.run = function(client, message, args) {
+    let commands = message.client.commands.array();
+
+    let helpEmbed = new MessageEmbed()
+      .setTitle(`${message.client.user.username} Help`)
+      .setDescription(`[Add to Your Server](https://discord.com/api/oauth2/authorize?client_id=768537523545833494&permissions=8&scope=bot) **|** [Support](https://discord.gg/emX4EmamKR)`)
+      .setColor("#FF006E");
+
+     
+
+    commands.forEach((cmd) => {
+      helpEmbed.addField(
+        `**${message.client.prefix}${cmd.name} ${cmd.aliases ? `(${cmd.aliases})` : ""}**`,
+        `${cmd.description}`,
+        true
+      );
+    });
+
+    helpEmbed.setTimestamp();
+    message.react('782526527044059136');
+    return message.channel.send(helpEmbed).catch(console.error);
+  }
+
+
+exports.conf = {
+    enabled: false,
+    guildOnly: false,
+    aliases: ['com','commands'],
+    permLevel: 0
+  };
+  
+  exports.help = {
+    name: 'commands'
+    
+  };
