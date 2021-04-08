@@ -12,7 +12,7 @@ const embed = new Discord.MessageEmbed()
 .setTitle(`My prefix is (${prefix})`)
 .setThumbnail(client.user.avatarURL())
 .setTimestamp()
-.setDescription(`test`)
+.setDescription(`[Add to your server](https://discord.com/api/oauth2/authorize?client_id=816089794002157598&permissions=8&scope=bot) **|** [Support](https://discord.gg/EKwREXxUdn)`)
 .addField("**🌙 Global Commands**", `invite / info / ping / info`, false)
 
 
