@@ -12,12 +12,8 @@ const embed = new Discord.MessageEmbed()
 .setTitle(`My prefix is (${prefix})`)
 .setThumbnail(client.user.avatarURL())
 .setTimestamp()
-.setDescription(`
-\`✨\`__Global Commands__
-avatar / info / invite /
-ping / gifs / showemoji
-> __Vip Commands__\`🔥\` / moderation / funny / games
-`)
+.setDescription(`test`)
+.addField("**🌙GlobalCommands**", ` invite / info / avatar / ping` flase)
 
 
 
