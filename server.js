@@ -147,12 +147,12 @@ client.on("guildCreate", guild => {
   let embed = new MessageEmbed().setColor("RANDOM")
   .setAuthor(client.user.username, client.user.avatarURL())
   .setTitle( `**Joined This Server!**`)
-  .addField("**Server Name:**",  `${guild.name}` )
+  .addField("**Server Name:**",  ${guild.name} )
   .addField("**Server Owner:**",  `${guild.owner}` )
   .addField("**Server Id:**",  `${guild.id}` )
-  .addField("**Member Count:**",  `**__${guild.memberCount}__**` )
+  .addField("**Member Count:**",  `${guild.memberCount}` )
   .setFooter(`${client.user.tag}`);
-  channel.send(embed);embed.react("☑️")
+  channel.send(embed);
 });
 
 client.on("guildDelete", guild => {
