@@ -19,7 +19,7 @@ exports.run = function(client, message, args) {
     });
 
     helpEmbed.setTimestamp();
-    message.react('782526527044059136');
+    message.react('🟣');
     return message.channel.send(helpEmbed).catch(console.error);
   }
 
