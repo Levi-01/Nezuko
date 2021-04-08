@@ -13,7 +13,7 @@ const embed = new Discord.MessageEmbed()
 .setThumbnail(client.user.avatarURL())
 .setTimestamp()
 .setDescription(`test`)
-.addField("**🌙 Global Commands**", `invite / info / ping / info`, true)
+.addField("**🌙 Global Commands**", `invite / info / ping / info`, false)
 
 
 .setFooter(`${message.author.tag} `, message.author.avatarURL)
