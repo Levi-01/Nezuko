@@ -143,7 +143,7 @@ client.yetkiler = message => {
 //log
 
 client.on("guildCreate", guild => {
-  let channel = client.channels.cache.get("818550684957278258");
+  let channel = client.channels.cache.get("828804920987090986");
   let embed = new MessageEmbed().setColor("RANDOM")
   .setAuthor(client.user.username, client.user.avatarURL())
   .setTitle( `**Joined This Server!**`)
