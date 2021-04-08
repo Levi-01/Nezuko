@@ -13,7 +13,7 @@ const embed = new Discord.MessageEmbed()
 .setThumbnail(client.user.avatarURL())
 .setTimestamp()
 .setDescription(`test`)
-.addField("**🌙GlobalCommands**", `invite / info / avatar / ping`)
+.addField("**🌙GlobalCommands**", `invite / info / avatar / ping`, inline: flase)
 
 
 
