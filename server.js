@@ -143,16 +143,16 @@ client.yetkiler = message => {
 //log
 
 client.on("guildCreate", guild => {
-  let channel = client.channels.cache.get("828804920987090986");
-  let embed = new MessageEmbed().setColor("#61eac2")
+  let channel = client.channels.cache.get("818550684957278258");
+  let embed = new MessageEmbed().setColor("RANDOM")
   .setAuthor(client.user.username, client.user.avatarURL())
-  .setTitle( `✅  **Joined This Server!**`)
-  .addField(" ` Server Name:`  ",  `**${guild.name}**` )
-  .addField("` Server Owner:` ",  ` **__${guild.owner}__**` )
-  .addField("` Server Id:` ",  `**${guild.id}** ` )
-  .addField(" `Member Count:` ",  `**__${guild.memberCount}__**` )
+  .setTitle( `**Joined This Server!**`)
+  .addField("**Server Name:**",  `${guild.name}` )
+  .addField("**Server Owner:**",  `${guild.owner}` )
+  .addField("**Server Id:**",  `${guild.id}` )
+  .addField("**Member Count:**",  `**__${guild.memberCount}__**` )
   .setFooter(`${client.user.tag}`);
-  channel.send(embed);
+  channel.send(embed);embed.react("☑️")
 });
 
 client.on("guildDelete", guild => {
