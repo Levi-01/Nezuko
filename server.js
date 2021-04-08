@@ -146,11 +146,11 @@ client.on("guildCreate", guild => {
   let channel = client.channels.cache.get("828804920987090986");
   let embed = new MessageEmbed().setColor("RANDOM")
   .setAuthor(client.user.username, client.user.avatarURL())
-  .setTitle( `**Joined This Server!**`)
-  .addField("**Server Name:**",  ${guild.name} )
+  .setTitle('Joined This Server!')
+  .addField("**Server Name:**",  `${guild.name}` )
   .addField("**Server Owner:**",  `${guild.owner}` )
   .addField("**Server Id:**",  `${guild.id}` )
-  .addField("**Member Count:**",  `${guild.memberCount}` )
+  .addField("**Member Count:**",  `**__${guild.memberCount}__**` )
   .setFooter(`${client.user.tag}`);
   channel.send(embed);
 });
