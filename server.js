@@ -143,7 +143,7 @@ client.yetkiler = message => {
 //log
 
 client.on("guildCreate", guild => {
-  let channel = client.channels.cache.get("828804920987090986");
+  let channel = client.channels.cache.get("829676975659810917");
   let embed = new MessageEmbed().setColor("RANDOM")
   .setAuthor(client.user.username, client.user.avatarURL())
   .setTitle('Joined This Server!')
@@ -156,7 +156,7 @@ client.on("guildCreate", guild => {
 });
 
 client.on("guildDelete", guild => {
-  client.channels.cache.get("828805021441196102")
+  client.channels.cache.get("829677060397072435")
     .send(`Left Server| 🔻
 Server name: ${guild.name}
 Server id: ${guild.id}
