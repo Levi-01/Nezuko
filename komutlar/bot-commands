@@ -10,7 +10,7 @@ exports.run = function(client, message, args) {
 
      
 
-    komutlar.forEach((cmd) => {
+    commands.forEach((cmd) => {
       helpEmbed.addField(
         `**${message.client.prefix}${cmd.name} ${cmd.aliases ? `(${cmd.aliases})` : ""}**`,
         `${cmd.description}`,
