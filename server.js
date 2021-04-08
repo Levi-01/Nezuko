@@ -1,4 +1,4 @@
-const discord = require('discord.js');
+const { Client, Collection, MessageEmbed,MessageAttachment } = require('discord.js');
 const fs = require('fs');
 const http = require('http');
 const express = require('express');
@@ -143,13 +143,16 @@ client.yetkiler = message => {
 //log
 
 client.on("guildCreate", guild => {
-  client.channels.cache.get("828804920987090986")
-.send(`join server |🔺
-Server name: ${guild.name}
-Server owner: ${guild.owner}
-Server id: ${guild.id}
-Server Count: ${guild.memberCount}
-`);  
+  let channel = client.channels.cache.get("818550684957278258");
+  let embed = new MessageEmbed().setColor("#61eac2")
+  .setAuthor(client.user.username, client.user.avatarURL())
+  .setTitle( `✅  **Joined This Server!**`)
+  .addField(" ` Server Name:`  ",  `**${guild.name}**` )
+  .addField("` Server Owner:` ",  ` **__${guild.owner}__**` )
+  .addField("` Server Id:` ",  `**${guild.id}** ` )
+  .addField(" `Member Count:` ",  `**__${guild.memberCount}__**` )
+  .setFooter(`${client.user.tag}`);
+  channel.send(embed);
 });
 
 client.on("guildDelete", guild => {
