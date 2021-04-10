@@ -6,7 +6,7 @@ let replies = ["https://pin.it/2DpgQtY"]
 
 let result = Math.floor((Math.random() * replies.length));
 
-let gifembed = new Discord.MessageEmbed()
+let photoembed = new Discord.MessageEmbed()
 
 
 .setColor("RANDOM")
@@ -15,7 +15,7 @@ let gifembed = new Discord.MessageEmbed()
 
 .setImage(replies[result]);
 
-message.channel.send(gifembed);
+message.channel.send(photoembed);
 
 };
 
