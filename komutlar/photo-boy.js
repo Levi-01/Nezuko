@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
 
-let replies = ["https://pin.it/2DpgQtY"]
+let replies = ["https://pin.it/7CHgWXK"]
 
 let result = Math.floor((Math.random() * replies.length));
 
