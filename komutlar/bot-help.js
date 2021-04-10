@@ -13,7 +13,7 @@ const embed = new Discord.MessageEmbed()
 .setThumbnail(client.user.avatarURL())
 .setTimestamp()
 .setDescription(`[Add to your server](https://discord.com/api/oauth2/authorize?client_id=816089794002157598&permissions=8&scope=bot) **|** [Support](https://discord.gg/EKwREXxUdn)`)
-.addField("**🌙 Info Commands**", `invite • info • ping • info`, true)
+.addField("**🌙 Info Commands**", `invite • info • ping • avatar`, true)
 .addField("**🌙 Gifs Commands**", `anime • girl • boy • animal • couple • bff • movies • giphy • neon • smoke • streamer`, true)
 .addField("**🌙 Mod Commands**", `clear • lock • unlock • kick • ban • role • nickname • addemoji • emojilist`, true)
 
