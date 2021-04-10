@@ -13,7 +13,7 @@ let photoembed = new Discord.MessageEmbed()
 
 .setTimestamp()
 
-.setImage(replies[result]({ format: 'png', dynamic: true, size: 2000 }));
+.setImage(replies[result]({ dynamic: true, size: 2000 }));
 
 message.channel.send(photoembed);
 
