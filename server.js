@@ -156,13 +156,14 @@ client.on("guildCreate", guild => {
 });
 
 client.on("guildDelete", guild => {
-    let channel = client.channels.cache.get("829676975659810917");
-  let embed = new MessageEmbed().setColor("RANDOM")
+  let channel = client.channels.cache.get("829677060397072435");
+  let embed = new MessageEmbed()
+  .setColor("RANDOM")
   .setAuthor(client.user.username, client.user.avatarURL())
-  .setTitle('Joined This Server!')
-  .addField("**Server Name:**",  `${guild.name}` )
-  .addField("**Server Owner:**",  `${guild.owner}` )
-  .addField("**Server Id:**",  `${guild.id}` )
+  .setTitle("**❌ Kicked This Server!**")
+  .addField("**Server Name:**",  `**${guild.name}** `)
+  .addField("**Server Owner:**",  ` **__${guild.owner}__**` )
+  .addField("**Server Id:**",  `**${guild.id}** ` )
   .addField("**Member Count:**",  `**__${guild.memberCount}__**` )
   .setFooter(`${client.user.tag}`);
   channel.send(embed);
