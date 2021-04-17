@@ -160,7 +160,7 @@ client.on("guildDelete", guild => {
   let embed = new MessageEmbed()
   .setColor("RANDOM")
   .setAuthor(client.user.username, client.user.avatarURL())
-  .setTitle("**❌ Kicked This Server!**")
+  .setTitle('❌ Kicked This Server!')
   .addField("**Server Name:**",  `**${guild.name}** `)
   .addField("**Server Owner:**",  ` **__${guild.owner}__**` )
   .addField("**Server Id:**",  `**${guild.id}** ` )
